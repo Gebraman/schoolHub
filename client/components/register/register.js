@@ -48,22 +48,30 @@ async function handleRegister(e) {
   }
 
   try {
-    const res = await fetch("http://localhost:5000/api/auth/register", {
+    const res = await fetch("http://localhost:3000/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password })
+      body: JSON.stringify({ name, email, password }),
     });
 
-    const data = await res.json();
-
+    // If server returned non-OK, try to read a helpful message
     if (!res.ok) {
-      alert(data.message);
+      const text = await res.text();
+      try {
+        const json = JSON.parse(text);
+        alert(json.message || "Server error");
+      } catch (e) {
+        // Response may be HTML (404 page) or plain text
+        const stripped = text.replace(/<[^>]*>/g, "").trim();
+        alert(stripped || "Server error");
+        console.error("Non-JSON response from server:", text);
+      }
       return;
     }
 
-    alert("Registration successful! Please login.");
+    const data = await res.json();
+    alert(data.message || "Registration successful! Please login.");
     show(renderLogin);
-
   } catch (err) {
     alert("Server error. Try again later.");
     console.error(err);

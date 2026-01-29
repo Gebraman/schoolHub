@@ -1,5 +1,3 @@
-const express = require("express");
-const app = express();
 //connect to the database
 const mysql = require("mysql2");
 
