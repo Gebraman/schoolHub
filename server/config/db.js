@@ -1,20 +1,21 @@
-//connect to the database
+require("dotenv").config();
+// connect to the database using environment variables
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "schoolhub",
-  password: "Gebremedhin100%",
-  database: "schoolhub"
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "schoolhub",
+  password: process.env.DB_PASS || "Gebremedhin100%",
+  database: process.env.DB_NAME || "schoolhub",
+  waitForConnections: true,
 });
 
-db.connect(err => {
+db.connect((err) => {
   if (err) {
-    console.error("❌ MySQL error:", err);
+    console.error(" MySQL error:", err);
   } else {
-    console.log("✅ MySQL connected");
+    console.log(" MySQL connected");
   }
 });
 
 module.exports = db;
-

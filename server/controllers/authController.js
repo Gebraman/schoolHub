@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
+require("dotenv").config();
 
 // REGISTER
 exports.register = async (req, res) => {
@@ -38,15 +39,15 @@ exports.login = async (req, res) => {
     }
 
     // 2. Compare password
-    const isMatch = await bcrypt.compare(password, userModel.password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });
     }
 
     // 3. Create JWT
     const token = jwt.sign(
-      { id: userModel.id, role: userModel.role },
-      "SECRET_KEY",
+      { id: user.id, role: user.role },
+      process.env.JWT_SECRET || "SECRET_KEY",
       { expiresIn: "1h" },
     );
 

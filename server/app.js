@@ -1,23 +1,37 @@
+require("dotenv").config();
 const express = require("express");
+const path = require("path");
 const db = require("./config/db");
 const cors = require("cors");
 const app = express();
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
 app.use(express.json());
-app.use(cors());
-const port = 3000;
+
+// Serve client static files (optional but helpful during development)
+app.use(express.static(path.join(__dirname, "../client")));
+
+const port = process.env.PORT || 3000;
+
 app.get("/", (req, res) => {
   res.send("the schoolhub server is running here");
 });
-// Register routes before starting the server
+
+// Authentication routes (public)
 app.use("/api/auth", require("./routes/authRoutes"));
+
+// Protected user routes
+app.use("/api/user", require("./routes/userRoutes"));
 
 // Return JSON 404 for unknown API routes (helps clients parse errors)
 app.use("/api", (req, res) => {
   res.status(404).json({ message: "API route not found" });
-});
-
-app.listen(port, () => {
-  console.log(`the schoolhub server is running on port ${port}`);
 });
 
 // Global error handler (returns JSON for unexpected errors)
@@ -25,4 +39,8 @@ app.use((err, req, res, next) => {
   console.error(err && err.stack ? err.stack : err);
   if (res.headersSent) return next(err);
   res.status(500).json({ message: "Internal server error" });
+});
+
+app.listen(port, () => {
+  console.log(`the schoolhub server is running on port ${port}`);
 });
