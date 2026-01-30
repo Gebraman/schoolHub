@@ -22,6 +22,7 @@ function renderDashboard() {
         <p>${data.message}</p>
         <p>User ID: ${data.user.id}</p>
         <p>Role: ${data.user.role}</p>
+        
       `;
     })
     .catch(() => {

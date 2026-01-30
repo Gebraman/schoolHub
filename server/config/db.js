@@ -6,7 +6,7 @@ const db = mysql.createConnection({
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "schoolhub",
   password: process.env.DB_PASS || "Gebremedhin100%",
-  database: process.env.DB_NAME || "schoolhub",
+  database: process.env.DB_NAME || "schoolhub_db",
   waitForConnections: true,
 });
 

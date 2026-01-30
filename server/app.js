@@ -23,11 +23,16 @@ app.get("/", (req, res) => {
   res.send("the schoolhub server is running here");
 });
 
-// Authentication routes (public)
-app.use("/api/auth", require("./routes/authRoutes"));
-
 // Protected user routes
 app.use("/api/user", require("./routes/userRoutes"));
+
+// Protected course routes
+app.use("/api/courses", require("./routes/courseRoutes"));
+// Protected enrollment routes
+app.use("/api/enrollments", require("./routes/enrollmentRoutes"));
+
+// Auth routes (register/login)
+app.use("/api/auth", require("./routes/authRoutes"));
 
 // Return JSON 404 for unknown API routes (helps clients parse errors)
 app.use("/api", (req, res) => {
