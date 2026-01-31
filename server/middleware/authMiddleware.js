@@ -12,11 +12,11 @@ module.exports = function (req, res, next) {
   const token = authHeader.split(" ")[1];
 
   try {
-    // 3. Verify token
-    const decoded = jwt.verify(token, "SECRET_KEY");
+    // 3. Verify token (use same secret as signer)
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "SECRET_KEY");
 
     // 4. Attach user to request
-    req.user = decoded;
+    req.user = decoded; // contains id, role, and (now) name if present
 
     next(); // allow access
   } catch (err) {

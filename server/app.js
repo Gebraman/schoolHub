@@ -31,6 +31,9 @@ app.use("/api/courses", require("./routes/courseRoutes"));
 // Protected enrollment routes
 app.use("/api/enrollments", require("./routes/enrollmentRoutes"));
 
+// Protected dashboard routes
+app.use("/api/dashboard", require("./routes/dashboardRoutes"));
+
 // Auth routes (register/login)
 app.use("/api/auth", require("./routes/authRoutes"));
 

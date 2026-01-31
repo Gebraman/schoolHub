@@ -1,10 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/authMiddleware");
-const admin = require("../middleware/adminMiddleware");
+const role = require("../middleware/roleMiddleware");
 const controller = require("../controllers/courseController");
 
-router.post("/", auth, admin, controller.createCourse);
-router.get("/", auth, controller.getCourses);
+// Admin only
+router.post("/", auth, role("admin"), controller.create);
+router.put("/:id", auth, role("admin"), controller.update);
+router.delete("/:id", auth, role("admin"), controller.remove);
+
+// Everyone
+router.get("/", controller.list);
 
 module.exports = router;

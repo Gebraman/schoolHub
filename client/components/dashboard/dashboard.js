@@ -7,7 +7,7 @@ function renderDashboard() {
     return;
   }
 
-  fetch("http://localhost:3000/api/user/dashboard", {
+  fetch("http://localhost:3000/api/dashboard/student", {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -18,11 +18,20 @@ function renderDashboard() {
     })
     .then((data) => {
       app.innerHTML = `
-        <h2>Dashboard</h2>
-        <p>${data.message}</p>
-        <p>User ID: ${data.user.id}</p>
-        <p>Role: ${data.user.role}</p>
-        
+        <h2>Student Dashboard</h2>
+        <p>Welcome, ${data.user?.name || "Student"}</p>
+
+        <h3>Your Courses</h3>
+        ${
+          data.courses && data.courses.length
+            ? `<ul>${data.courses
+                .map(
+                  (course) =>
+                    `<li><strong>${course.title}</strong> – ${course.description}</li>`,
+                )
+                .join("")}</ul>`
+            : `<p>You are not enrolled in any courses yet.</p>`
+        }
       `;
     })
     .catch(() => {

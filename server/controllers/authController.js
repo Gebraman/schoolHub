@@ -44,9 +44,9 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    // 3. Create JWT
+    // 3. Create JWT (include user name so frontend can show it without extra requests)
     const token = jwt.sign(
-      { id: user.id, role: user.role },
+      { id: user.id, role: user.role, name: user.name },
       process.env.JWT_SECRET || "SECRET_KEY",
       { expiresIn: "1h" },
     );
@@ -54,6 +54,7 @@ exports.login = async (req, res) => {
     res.json({
       message: "Login successful",
       token,
+      user: { id: user.id, name: user.name, role: user.role },
     });
   } catch (err) {
     console.error("Login error:", err);
