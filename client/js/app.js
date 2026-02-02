@@ -21,6 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("contact")
     ?.addEventListener("click", () => show(renderContact));
+  document
+    .getElementById("courses")
+    ?.addEventListener("click", () => show(renderCourses));
+  document
+    .getElementById("createCourse")
+    ?.addEventListener("click", () => show(renderCreateCourse));
 
   // Default
   show(renderHome); //default view is home

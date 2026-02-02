@@ -27,3 +27,8 @@ exports.remove = async (req, res) => {
   await Course.deleteCourse(req.params.id);
   res.json({ message: "Course deleted" });
 };
+
+// exports.getOne = async (req, res) => {
+//   const [rows] = await Course.getById(req.params.id);
+//   res.json(rows[0]);
+// };
