@@ -1,24 +1,23 @@
 const jwt = require("jsonwebtoken");
 
-module.exports = function (req, res, next) {
-  // 1. Get token from header
+module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
-
   if (!authHeader) {
     return res.status(401).json({ message: "No token, access denied" });
   }
 
-  // 2. Token format: "Bearer TOKEN"
   const token = authHeader.split(" ")[1];
 
+  if (!process.env.JWT_SECRET) {
+    console.error("JWT verification error: JWT_SECRET is not set.");
+    return res
+      .status(500)
+      .json({ message: "Server configuration error: JWT secret not set" });
+  }
+
   try {
-    // 3. Verify token (use same secret as signer)
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "SECRET_KEY");
-
-    // 4. Attach user to request
-    req.user = decoded; // contains id, role, and (now) name if present
-
-    next(); // allow access
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
   }

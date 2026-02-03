@@ -1,6 +1,9 @@
-exports.createCourse = (title, description) => {
-  const sql = "INSERT INTO courses (title, description) VALUES (?, ?)";
-  return db.promise().query(sql, [title, description]);
+const db = require("../config/db");
+
+exports.createCourse = (title, description, adminId) => {
+  const sql =
+    "INSERT INTO courses (title, description, created_by) VALUES (?, ?, ?)";
+  return db.promise().query(sql, [title, description, adminId]);
 };
 
 exports.getAllCourses = () => {

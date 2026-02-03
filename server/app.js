@@ -1,4 +1,17 @@
 require("dotenv").config();
+
+// Fail fast if required env vars are missing (helps developers avoid runtime errors)
+const requiredEnv = ["JWT_SECRET", "DB_HOST", "DB_USER", "DB_PASS", "DB_NAME"];
+const missingEnv = requiredEnv.filter(
+  (k) => !process.env[k] || process.env[k].toString().trim() === "",
+);
+if (missingEnv.length) {
+  console.error(
+    `Missing required env variables: ${missingEnv.join(", ")}. Please copy .env.example to .env and set them.`,
+  );
+  process.exit(1);
+}
+
 const express = require("express");
 const path = require("path");
 const db = require("./config/db");
@@ -28,7 +41,10 @@ app.use("/api/user", require("./routes/userRoutes"));
 
 // Protected course routes
 app.use("/api/courses", require("./routes/courseRoutes"));
+//protected lesson routes
+app.use("/api/lessons", require("./routes/lessonRoutes"));
 // Protected enrollment routes
+
 app.use("/api/enrollments", require("./routes/enrollmentRoutes"));
 
 // Protected dashboard routes

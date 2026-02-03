@@ -1,12 +1,16 @@
 const Course = require("../models/courseModel");
 
-// ADMIN: Create course
 exports.create = async (req, res) => {
-  const { title, description } = req.body;
+  try {
+    const { title, description } = req.body;
 
-  await Course.createCourse(title, description, req.user.id);
+    await Course.createCourse(title, description, req.user.id);
 
-  res.status(201).json({ message: "Course created" });
+    res.status(201).json({ message: "Course created" });
+  } catch (err) {
+    console.error("CREATE COURSE ERROR:", err);
+    res.status(500).json({ message: "Failed to create course" });
+  }
 };
 
 // PUBLIC: View courses
