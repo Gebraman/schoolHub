@@ -30,7 +30,7 @@ module.exports = {
 };
 
 // STUDENTS (ENROLLED)
-async function listByCourse(req, res) {
+async function getLessonsByCourse(req, res) {
   try {
     const { courseId } = req.params;
     const userId = req.user.id;
@@ -50,4 +50,4 @@ async function listByCourse(req, res) {
   }
 }
 //exports
-module.exports.listByCourse = listByCourse;
+module.exports.getLessonsByCourse = getLessonsByCourse;

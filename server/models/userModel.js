@@ -4,17 +4,32 @@ const db = require("../config/db");
  * Create a new user
  * REAL LIFE: "Save a new user into the database"
  */
-function createUser(name, email, password, role = "student") {
+
+// After (updated code)
+
+function createUser(
+  firstName,
+  lastName,
+  email,
+  password,
+  department,
+  section,
+  role = "student",
+) {
   const sql = `
-    INSERT INTO users (name, email, password, role)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO users (firstName, lastName, email, password, department, section, role)
+    VALUES (?, ?, ?, ?,?, ?, ?)
   `;
 
   return new Promise((resolve, reject) => {
-    db.query(sql, [name, email, password, role], (err, result) => {
-      if (err) return reject(err);
-      resolve(result);
-    });
+    db.query(
+      sql,
+      [firstName, lastName, email, password, department, section, role],
+      (err, result) => {
+        if (err) return reject(err);
+        resolve(result);
+      },
+    );
   });
 }
 
@@ -35,5 +50,5 @@ function findUserByEmail(email) {
 
 module.exports = {
   createUser,
-  findUserByEmail
+  findUserByEmail,
 };

@@ -1,0 +1,73 @@
+.assignment-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  font-family: system-ui, sans-serif;
+}
+
+.assignment-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+  animation: fadeInUp 0.45s ease;
+}
+
+.assignment-card h2 {
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+.hint {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 22px;
+}
+
+.assignment-card input[type="text"],
+.assignment-card input[type="date"],
+.assignment-card input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.assignment-card input[type="file"] {
+  background: #f9fafb;
+}
+
+.assignment-card button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.assignment-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

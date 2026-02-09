@@ -1,9 +1,11 @@
 const db = require("../config/db");
 
-exports.createCourse = (title, description, adminId) => {
+exports.createCourse = (title, description, department, section, adminId) => {
   const sql =
-    "INSERT INTO courses (title, description, created_by) VALUES (?, ?, ?)";
-  return db.promise().query(sql, [title, description, adminId]);
+    "INSERT INTO courses (title, description, department, section, created_by) VALUES (?, ?, ?, ?, ?)";
+  return db
+    .promise()
+    .query(sql, [title, description, department, section, adminId]);
 };
 
 exports.getAllCourses = () => {

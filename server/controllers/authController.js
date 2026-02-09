@@ -5,7 +5,8 @@ require("dotenv").config();
 
 // REGISTER
 exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { firstName, lastName, email, password, department, section } =
+    req.body;
 
   try {
     // 1. Check if user exists
@@ -16,7 +17,14 @@ exports.register = async (req, res) => {
     // 2. Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
     // 3. Save user
-    await userModel.createUser(name, email, hashedPassword);
+    await userModel.createUser(
+      firstName,
+      lastName,
+      email,
+      hashedPassword,
+      department,
+      section,
+    );
 
     res.status(201).json({ message: "User registered successfully" });
   } catch (err) {
@@ -64,7 +72,14 @@ exports.login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user.id, role: user.role, name: user.name },
+      {
+        id: user.id,
+        role: user.role,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        department: user.department,
+        section: user.section,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "24h" },
     );
@@ -73,7 +88,14 @@ exports.login = async (req, res) => {
     res.json({
       message: "Login successful",
       token,
-      user: { id: user.id, name: user.name, role: user.role },
+      user: {
+        id: user.id,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        role: user.role,
+        department: user.department,
+        section: user.section,
+      },
     });
   } catch (err) {
     console.error("Login error:", err);

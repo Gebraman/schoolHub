@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const verifyToken = require("../middleware/authMiddleware");
 const role = require("../middleware/roleMiddleware");
+const lessonController = require("../controllers/lessonController");
 
 router.post(
   "/courses/:courseId/lessons",
@@ -14,6 +15,6 @@ router.get(
   "/courses/:courseId/lessons",
   verifyToken,
   role("student"),
-  lessonController.listByCourse,
+  lessonController.getLessonsByCourse,
 );
 module.exports = router;

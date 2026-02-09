@@ -1,0 +1,32 @@
+.course {
+  max-width: 900px;
+  margin: auto;
+}
+
+.schedule,
+.materials,
+.upload {
+  background: #fff;
+  padding: 16px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.materials ul {
+  list-style: none;
+  padding: 0;
+}
+
+.materials li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.materials li a {
+  color: #3498db;
+  font-weight: 600;
+}
+
+.hidden {
+  display: none;
+}
