@@ -13,12 +13,8 @@ export async function renderAdminDashboard() {
   app.innerHTML = await res.text();
 
   const user = JSON.parse(localStorage.getItem("user"));
-  if (!user || (user.role !== "admin" && user.role !== "super_admin")) {
-    alert("Access denied");
-    location.reload();
-    return;
-  }
 
+  document.getElementById("adminName").textContent = user.firstName;
   document.getElementById("adminRole").textContent = user.role;
   document.getElementById("adminDepartment").textContent =
     user.role === "super_admin" ? "All Departments" : user.department;

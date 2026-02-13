@@ -1,13 +1,13 @@
 import { loadCSS } from "../../utils/loadCSS.js";
 
 export async function renderCreateCourse() {
-  const app = document.getElementById("app");
+  const adminContent = document.getElementById("adminContent");
 
-  loadCSS("./pages/courses/createCourse.css");
+  loadCSS("./pages/admin/createCourse.css");
 
   const res = await fetch("./pages/admin/createCourse.html");
   const html = await res.text();
-  app.innerHTML = html;
+  adminContent.innerHTML = html;
 
   document.getElementById("createCourseBtn").onclick = createCourse;
 }
