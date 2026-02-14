@@ -1,6 +1,3 @@
-/* =========================
-   GLOBAL RESET (very light)
-   ========================= */
 *,
 *::before,
 *::after {
@@ -16,16 +13,13 @@ body {
     "Segoe UI",
     Roboto,
     sans-serif;
-  background-color: #f4f7fb;
+  background-color: #324660;
   color: #1f2933;
 }
 
-/* =========================
-   NAVBAR (layout only)
-   ========================= */
 #navbar {
-  background: linear-gradient(135deg, #1f2d3d, #243b55);
-  padding: 14px 32px;
+  background: linear-gradient(600deg, #3a030373, #540ea9);
+  padding: 10px 10px;
 }
 
 #navList {
@@ -38,7 +32,7 @@ body {
 }
 
 #navList li {
-  color: #e5e7eb;
+  color: #150115;
   font-weight: 600;
   cursor: pointer;
   position: relative;
@@ -47,10 +41,9 @@ body {
 }
 
 #navList li:hover {
-  color: #60a5fa;
+  color: #e7e8ebfa;
 }
 
-/* Active state (optional, future use) */
 #navList li.active {
   color: #60a5fa;
 }
@@ -64,56 +57,4 @@ body {
   height: 2px;
   background-color: #60a5fa;
   border-radius: 2px;
-}
-
-/* =========================
-   HEADER (landing branding)
-   ========================= */
-#header {
-  text-align: center;
-  padding: 60px 20px 40px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-#header h1 {
-  font-size: 2.8rem;
-  margin: 0;
-  color: #1e293b;
-}
-
-#header .subtitle {
-  margin-top: 10px;
-  font-size: 1.1rem;
-  color: #64748b;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* =========================
-   MAIN APP CONTAINER
-   ========================= */
-#app {
-  padding: 40px 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* =========================
-   RESPONSIVE (shell only)
-   ========================= */
-@media (max-width: 768px) {
-  #navList {
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  #header h1 {
-    font-size: 2.2rem;
-  }
-
-  #app {
-    padding: 30px 16px;
-  }
 }
