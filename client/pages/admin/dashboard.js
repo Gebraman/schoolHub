@@ -1,4 +1,4 @@
-import { renderCreateCourse } from "./createCourse.js";
+import { renderCreateCourse } from "./courses/createCourse.js";
 import { renderUploadMaterial } from "./uploadMaterial.js";
 import { renderUploadAssignment } from "./uploadAssignment.js";
 import { renderScheduleClass } from "./scheduleClass.js";

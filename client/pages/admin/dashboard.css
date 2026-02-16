@@ -1,5 +1,5 @@
 .admin-dashboard {
-  max-width: 1100px;
+  max-width: 2000px;
   margin: 40px auto;
   padding: 30px;
   font-family: system-ui, sans-serif;
@@ -8,11 +8,12 @@
 .admin-dashboard h2 {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #1f2937;
+  color: #90101e;
+  font-style: oblique;
 }
 
 .admin-info {
-  background: #f9fafb;
+  background: #140810ef;
   padding: 16px 20px;
   border-radius: 10px;
   margin-bottom: 30px;
@@ -20,7 +21,7 @@
 
 .admin-info p {
   margin: 6px 0;
-  color: #374151;
+  color: #e2e2e2;
 }
 
 .admin-cards {

@@ -22,11 +22,8 @@ exports.createCourse = async (req, res) => {
       }
     }
 
-    // 3️⃣ Super admin → no restriction
-    // (department & section are trusted ONLY for super_admin)
-
     // 4️⃣ Create course
-    await Course.create({
+    await Course.createCourse({
       title,
       description,
       department,
@@ -42,27 +39,3 @@ exports.createCourse = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-// PUBLIC: View courses
-exports.list = async (req, res) => {
-  const [courses] = await Course.getAllCourses();
-  res.json(courses);
-};
-
-// ADMIN: Update
-exports.update = async (req, res) => {
-  const { title, description } = req.body;
-  await Course.updateCourse(req.params.id, title, description);
-  res.json({ message: "Course updated" });
-};
-
-// ADMIN: Delete
-exports.remove = async (req, res) => {
-  await Course.deleteCourse(req.params.id);
-  res.json({ message: "Course deleted" });
-};
-
-// exports.getOne = async (req, res) => {
-//   const [rows] = await Course.getById(req.params.id);
-//   res.json(rows[0]);
-// };

@@ -1,11 +1,11 @@
-import { loadCSS } from "../../utils/loadCSS.js";
+import { loadCSS } from "../../../utils/loadCSS.js";
 
 export async function renderCreateCourse() {
   const adminContent = document.getElementById("adminContent");
 
-  loadCSS("./pages/admin/createCourse.css");
+  loadCSS("./pages/admin/courses/createCourse.css");
 
-  const res = await fetch("./pages/admin/createCourse.html");
+  const res = await fetch("./pages/admin/courses/createCourse.html");
   const html = await res.text();
   adminContent.innerHTML = html;
 

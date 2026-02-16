@@ -38,6 +38,9 @@ app.get("/", (req, res) => {
 
 const registerRoute = require("./routes/registerRoute");
 const loginRoute = require("./routes/loginRoute");
+const courseRoutes = require("./routes/courseRoutes");
+
+app.use("/api/courses", courseRoutes);
 
 app.use("/api/auth", registerRoute);
 app.use("/api/auth", loginRoute);
