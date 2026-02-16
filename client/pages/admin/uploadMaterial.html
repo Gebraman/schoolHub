@@ -4,21 +4,31 @@
 
     <p class="hint">Upload PPT or PDF files for your course.</p>
 
-    <input type="text" id="materialCourse" placeholder="Course Title" />
+    <!-- Select Course (Loaded from DB) -->
+    <div class="form-group">
+      <label for="materialCourse">Select Course</label>
+      <select id="materialCourse">
+        <option value="">Select Course</option>
+        <!-- Courses will be loaded dynamically -->
+      </select>
+    </div>
 
-    <select id="materialSection">
-      <option value="">Select Section</option>
-      <option value="1">Section 1</option>
-      <option value="2">Section 2</option>
-      <option value="3">Section 3</option>
-      <option value="4">Section 4</option>
-      <option value="5">Section 5</option>
-      <option value="6">Section 6</option>
-      <option value="7">Section 7</option>
-    </select>
+    <!-- Material Title -->
+    <div class="form-group">
+      <label for="materialTitle">Material Title</label>
+      <input
+        type="text"
+        id="materialTitle"
+        placeholder="e.g. Chapter 1 Slides"
+      />
+    </div>
 
-    <input type="file" id="materialFile" accept=".pdf,.ppt,.pptx" />
+    <!-- File Upload -->
+    <div class="form-group">
+      <label for="materialFile">Choose File</label>
+      <input type="file" id="materialFile" accept=".pdf,.ppt,.pptx" />
+    </div>
 
-    <button id="uploadMaterialBtn">Upload Material</button>
+    <button type="button" id="uploadMaterialBtn">Upload Material</button>
   </div>
 </section>

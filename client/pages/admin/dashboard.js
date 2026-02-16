@@ -25,7 +25,7 @@ export async function renderAdminDashboard() {
   document.getElementById("openCreateCourseBtn").onclick = renderCreateCourse;
 
   // New button for Upload Material
-  document.getElementById("uploadMaterialBtn").onclick = renderUploadMaterial;
+  document.getElementById("openMaterialBtn").onclick = renderUploadMaterial;
   // New button for Upload Assignment
   document.getElementById("uploadAssignmentBtn").onclick =
     renderUploadAssignment;

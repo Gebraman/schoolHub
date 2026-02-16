@@ -53,3 +53,15 @@ exports.createCourse = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+exports.getAdminCourses = async (req, res) => {
+  try {
+    const user = req.user;
+
+    const [courses] = await Course.getCoursesByAdmin(user.id);
+
+    res.json(courses);
+  } catch (err) {
+    console.error("GET COURSES ERROR:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};

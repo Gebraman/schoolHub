@@ -14,3 +14,7 @@ exports.createCourse = ({
     .promise()
     .query(sql, [title, description, department, section, created_by]);
 };
+exports.getCoursesByAdmin = (adminId) => {
+  const sql = "SELECT id, title FROM courses WHERE created_by = ?";
+  return db.promise().query(sql, [adminId]);
+};

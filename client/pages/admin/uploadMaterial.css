@@ -1,68 +1,98 @@
+/* Container */
 .upload-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 60px 20px;
-  font-family: system-ui, sans-serif;
+  align-items: flex-start;
+  padding: 40px 20px;
+  min-height: 100vh;
+  background-color: #f4f6f9;
 }
 
+/* Card */
 .upload-card {
-  width: 100%;
-  max-width: 420px;
   background: #ffffff;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-  animation: fadeInUp 0.4s ease;
+  padding: 30px 35px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* Title */
 .upload-card h2 {
   margin-bottom: 10px;
-  color: #1f2937;
+  font-size: 22px;
+  color: #333;
+  text-align: center;
 }
 
-.hint {
+/* Hint text */
+.upload-card .hint {
+  text-align: center;
   font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 20px;
+  color: #777;
+  margin-bottom: 25px;
 }
 
-.upload-card input[type="text"],
-.upload-card input[type="file"] {
-  width: 100%;
-  padding: 12px;
+/* Form group */
+.form-group {
   margin-bottom: 18px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
   font-size: 14px;
+  margin-bottom: 6px;
+  color: #444;
 }
 
-.upload-card input[type="file"] {
-  background: #f9fafb;
+/* Inputs & Select */
+.form-group input,
+.form-group select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
-.upload-card button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: #ffffff;
-  font-weight: 700;
+/* Focus effect */
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.15);
+}
+
+/* File input styling */
+input[type="file"] {
+  padding: 8px;
+  background-color: #fafafa;
   cursor: pointer;
 }
 
-.upload-card button:hover {
-  opacity: 0.95;
+/* Button */
+#uploadMaterialBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Button hover */
+#uploadMaterialBtn:hover {
+  background-color: #357abd;
+}
+
+/* Button active */
+#uploadMaterialBtn:active {
+  transform: scale(0.98);
 }
