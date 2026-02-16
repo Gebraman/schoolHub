@@ -5,6 +5,13 @@ exports.createCourse = async (req, res) => {
     const { title, description, department, section } = req.body;
     const user = req.user; // from verifyToken middleware
 
+    // Check if user exists
+    if (!user) {
+      return res.status(401).json({
+        message: "Unauthorized: User not found",
+      });
+    }
+
     // 1️⃣ Block students
     if (user.role === "student") {
       return res.status(403).json({
@@ -14,6 +21,13 @@ exports.createCourse = async (req, res) => {
 
     // 2️⃣ Admin validation (STRICT)
     if (user.role === "admin") {
+      // Check if admin's department and section are defined
+      if (!user.department || !user.section) {
+        return res.status(403).json({
+          message: "Access denied: Admin department or section not set",
+        });
+      }
+
       if (department !== user.department || section !== user.section) {
         return res.status(403).json({
           message:
@@ -22,7 +36,7 @@ exports.createCourse = async (req, res) => {
       }
     }
 
-    // 4️⃣ Create course
+    // 3️⃣ Create course
     await Course.createCourse({
       title,
       description,

@@ -1,4 +1,4 @@
-import { renderCreateCourse } from "./courses/createCourse.js";
+import { renderCreateCourse } from "./createCourse.js";
 import { renderUploadMaterial } from "./uploadMaterial.js";
 import { renderUploadAssignment } from "./uploadAssignment.js";
 import { renderScheduleClass } from "./scheduleClass.js";
@@ -22,7 +22,7 @@ export async function renderAdminDashboard() {
     user.role === "super_admin" ? "All Sections" : user.section;
 
   // Dashboard action buttons
-  document.getElementById("createCourseBtn").onclick = renderCreateCourse;
+  document.getElementById("openCreateCourseBtn").onclick = renderCreateCourse;
 
   // New button for Upload Material
   document.getElementById("uploadMaterialBtn").onclick = renderUploadMaterial;
