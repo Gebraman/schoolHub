@@ -9,7 +9,7 @@
 .course-card {
   width: 100%;
   max-width: 420px;
-  background: hsl(0, 0%, 96%);
+  background: hsl(0, 23%, 91%);
   padding: 30px;
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
@@ -23,7 +23,7 @@
 
 .course-card p {
   font-size: 14px;
-  color: #6b7280;
+  color: #ebeced;
   margin-bottom: 20px;
 }
 

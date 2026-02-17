@@ -9,6 +9,15 @@ export async function renderCreateCourse() {
   const html = await res.text();
   adminContent.innerHTML = html;
 
+  // Scroll the new content into view
+  const courseContainer = document.querySelector(".course-container");
+  if (courseContainer) {
+    // Slight delay so CSS animations run
+    setTimeout(() => {
+      courseContainer.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100); // 100ms delay
+  }
+
   document.getElementById("createCourseBtn").onclick = createCourse;
 }
 

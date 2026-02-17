@@ -10,8 +10,17 @@ export async function renderUploadMaterial() {
   const res = await fetch("./pages/admin/uploadMaterial.html");
   const html = await res.text();
   adminContent.innerHTML = html;
+
+  // Scroll into view smoothly after loading
+  const uploadContainer = document.querySelector(".upload-container");
+  if (uploadContainer) {
+    setTimeout(() => {
+      uploadContainer.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100); // small delay for fade-in effect
+  }
+
   // Fetch courses for dropdown
-  await loadCourses(); // 👈 load courses here
+  await loadCourses();
 
   // Attach event after HTML is loaded
   document.getElementById("uploadMaterialBtn").onclick = uploadMaterial;
@@ -56,6 +65,7 @@ async function uploadMaterial() {
     alert("Server error");
   }
 }
+
 async function loadCourses() {
   const token = localStorage.getItem("token");
 
@@ -72,7 +82,7 @@ async function loadCourses() {
 
     courses.forEach((course) => {
       const option = document.createElement("option");
-      option.value = course.id; // important
+      option.value = course.id;
       option.textContent = course.title;
       select.appendChild(option);
     });

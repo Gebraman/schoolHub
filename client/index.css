@@ -13,13 +13,13 @@ body {
     "Segoe UI",
     Roboto,
     sans-serif;
-  background-color: #324660;
+  background-color: #525252;
   color: #1f2933;
 }
 
 #navbar {
-  background: linear-gradient(600deg, #3a030373, #540ea9);
-  padding: 10px 10px;
+  background-color: #020617;
+  padding: 0px 0px;
 }
 
 #navList {
@@ -32,7 +32,7 @@ body {
 }
 
 #navList li {
-  color: #150115;
+  color: #ede3ed;
   font-weight: 600;
   cursor: pointer;
   position: relative;
@@ -57,4 +57,85 @@ body {
   height: 2px;
   background-color: #60a5fa;
   border-radius: 2px;
+}
+
+/* =============================
+   HAMBURGER BASE
+============================= */
+
+#hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+#hamburger span {
+  width: 30px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* Animate to X */
+#hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+#hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+#hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* =============================
+   MOBILE SIDEBAR
+============================= */
+
+@media (max-width: 768px) {
+  #navbar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+
+  #hamburger {
+    display: flex;
+  }
+
+  #navList {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    height: 100vh;
+    width: 260px;
+    background: #0f172a;
+    flex-direction: column;
+    padding: 100px 25px;
+    gap: 25px;
+    transition: left 0.35s ease;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+  }
+
+  #navList.show {
+    left: 0;
+  }
+
+  #navList li {
+    color: white;
+    font-size: 18px;
+  }
+
+  /* Push content smoothly */
+  #app {
+    transition: margin-left 0.35s ease;
+  }
+
+  body.menu-open #app {
+    margin-left: 260px;
+  }
 }

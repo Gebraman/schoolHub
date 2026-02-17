@@ -1,19 +1,46 @@
 .admin-dashboard {
-  max-width: 2000px;
-  margin: 40px auto;
-  padding: 30px;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #020617;
   font-family: system-ui, sans-serif;
+}
+
+/* Layout */
+.admin-profile-container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* Profile Wrapper */
+.profile-wrapper {
+  position: relative;
+}
+
+/* Circle Image */
+.profile-wrapper img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #22d3ee;
+  cursor: pointer;
+}
+
+/* Hide File Input */
+.profile-wrapper input {
+  display: none;
 }
 
 .admin-dashboard h2 {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #90101e;
+  color: #65a30d;
   font-style: oblique;
 }
 
 .admin-info {
-  background: #140810ef;
+  background: #a3a3a3;
   padding: 16px 20px;
   border-radius: 10px;
   margin-bottom: 30px;
@@ -21,7 +48,7 @@
 
 .admin-info p {
   margin: 6px 0;
-  color: #e2e2e2;
+  color: #4f46e5;
 }
 
 .admin-cards {
@@ -31,10 +58,10 @@
 }
 
 .admin-card {
-  background: #ffffff;
+  background: #5b21b6;
   padding: 22px;
   border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(74, 2, 2, 0.08);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
@@ -42,17 +69,17 @@
 
 .admin-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 30px 80px rgba(228, 225, 225, 0.92);
 }
 
 .admin-card h3 {
   margin-bottom: 10px;
-  color: #111827;
+  color: #22d3ee;
 }
 
 .admin-card p {
   font-size: 14px;
-  color: #6b7280;
+  color: #020617;
   margin-bottom: 16px;
 }
 
@@ -62,7 +89,7 @@
   border: none;
   border-radius: 10px;
   background: linear-gradient(135deg, #2563eb, #1e40af);
-  color: #ffffff;
+  color: #1f0342;
   font-weight: 600;
   cursor: pointer;
 }

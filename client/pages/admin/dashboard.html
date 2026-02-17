@@ -1,11 +1,24 @@
 <section class="admin-dashboard">
-  <h2>Admin Dashboard</h2>
-
   <div class="admin-info">
-    <p><strong>Name:</strong> <span id="adminName"></span></p>
-    <p><strong>Role:</strong> <span id="adminRole"></span></p>
-    <p><strong>Department:</strong> <span id="adminDepartment"></span></p>
-    <p><strong>Section:</strong> <span id="adminSection"></span></p>
+    <div class="admin-profile-container">
+      <!-- Profile Image -->
+      <div class="profile-wrapper">
+        <img
+          id="adminAvatar"
+          src="/images/default-profile.png"
+          alt="Admin Profile"
+        />
+        <input type="file" id="profileInput" accept="image/*" />
+      </div>
+
+      <!-- Admin Info -->
+      <div class="admin-details">
+        <p><strong>Name:</strong> <span id="adminName"></span></p>
+        <p><strong>Role:</strong> <span id="adminRole"></span></p>
+        <p><strong>Department:</strong> <span id="adminDepartment"></span></p>
+        <p><strong>Section:</strong> <span id="adminSection"></span></p>
+      </div>
+    </div>
   </div>
 
   <div class="admin-cards">

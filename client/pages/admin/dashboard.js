@@ -23,12 +23,41 @@ export async function renderAdminDashboard() {
 
   // Dashboard action buttons
   document.getElementById("openCreateCourseBtn").onclick = renderCreateCourse;
-
-  // New button for Upload Material
   document.getElementById("openMaterialBtn").onclick = renderUploadMaterial;
-  // New button for Upload Assignment
   document.getElementById("uploadAssignmentBtn").onclick =
     renderUploadAssignment;
-  // New button for Schedule Class
   document.getElementById("scheduleClassBtn").onclick = renderScheduleClass;
+
+  /* ==============================
+     PROFILE IMAGE PREVIEW LOGIC
+     ============================== */
+
+  const profileInput = document.getElementById("profileInput");
+  const adminAvatar = document.getElementById("adminAvatar");
+
+  // Load saved image from localStorage
+  const savedImage = localStorage.getItem("adminProfileImage");
+  if (savedImage) {
+    adminAvatar.src = savedImage;
+  }
+
+  // Click image → open file picker
+  adminAvatar.addEventListener("click", () => {
+    profileInput.click();
+  });
+
+  // Preview and save image
+  profileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      adminAvatar.src = e.target.result;
+
+      // Save to localStorage
+      localStorage.setItem("adminProfileImage", e.target.result);
+    };
+    reader.readAsDataURL(file);
+  });
 }
