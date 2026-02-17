@@ -2,7 +2,7 @@ const Course = require("../models/courseModel");
 
 exports.createCourse = async (req, res) => {
   try {
-    const { title, description, department, section } = req.body;
+    const { title, description, department, section, year } = req.body;
     const user = req.user; // from verifyToken middleware
 
     // Check if user exists
@@ -22,16 +22,20 @@ exports.createCourse = async (req, res) => {
     // 2️⃣ Admin validation (STRICT)
     if (user.role === "admin") {
       // Check if admin's department and section are defined
-      if (!user.department || !user.section) {
+      if (!user.department || !user.section || !year) {
         return res.status(403).json({
-          message: "Access denied: Admin department or section not set",
+          message: "Access denied: Admin department, section  and year not set",
         });
       }
 
-      if (department !== user.department || section !== user.section) {
+      if (
+        department !== user.department ||
+        section !== user.section ||
+        year !== user.year
+      ) {
         return res.status(403).json({
           message:
-            "Access denied: You can only create courses for your own department and section",
+            "Access denied: You can only create courses for your own department,section and year",
         });
       }
     }
@@ -42,6 +46,7 @@ exports.createCourse = async (req, res) => {
       description,
       department,
       section,
+      year,
       created_by: user.id,
     });
 

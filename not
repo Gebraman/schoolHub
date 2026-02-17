@@ -1,7 +1,8 @@
 UPDATE users SET role = 'superadmin' WHERE email = 'endeshawegebremedhin@gmail.com';
-UPDATE users SET role = 'admin' WHERE email = 'samigebra2@gmail.com';
+UPDATE users SET role = 'admin' WHERE email = 'getenet@gmail.com';
 '8', 'abebe', 'belew', 'abebe@gmail.com', '$2b$10$OoHAnX7bDVSQPDRHJsYJ9.FIzP5XgsVUhnbGtvEyr5ECcT9ARxL8u', 'Accounting', '2', 'student', '2026-02-06 14:04:02'
 UPDATE users SET role = 'admin' WHERE email = 'endeshawegebremedhin@gmail.com';
 '9', 'Endeshaw', 'Melese', 'endeshawegebremedhin@gmail.com', '$2b$10$N/EP1mBxdHUXCxj0dFu3GugLh7qyw52aXWO9eWen1gw8dBgpWpunC', 'Economics', '2', 'admin', '2026-02-07 13:03:13'
+'14', 'getent', 'Endeshawe', 'getenet@gmail.com', '$2b$10$x7oPrB4hdH20KuCLmDT8HuKqh/qrH8fjzAZ9dscb8J8n2x9ZfV4ci', 'Management', '5', '1', 'admin', '2026-02-17 14:43:56'
 
 

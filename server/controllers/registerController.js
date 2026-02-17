@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const registerModel = require("../models/registerModel");
 
 exports.register = async (req, res) => {
-  const { firstName, lastName, email, password, department, section } =
+  const { firstName, lastName, email, password, department, section, year } =
     req.body;
 
   if (
@@ -11,7 +11,8 @@ exports.register = async (req, res) => {
     !email ||
     !password ||
     !department ||
-    !section
+    !section ||
+    !year
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -34,6 +35,7 @@ exports.register = async (req, res) => {
       hashedPassword,
       department,
       section,
+      year,
     );
 
     res.status(201).json({ message: "User registered successfully" });

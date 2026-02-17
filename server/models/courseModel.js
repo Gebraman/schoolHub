@@ -6,13 +6,14 @@ exports.createCourse = ({
   description,
   department,
   section,
+  year,
   created_by,
 }) => {
   const sql =
-    "INSERT INTO courses (title, description, department, section, created_by) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO courses (title, description, department, section, year, created_by) VALUES (?, ?, ?, ?, ?, ?)";
   return db
     .promise()
-    .query(sql, [title, description, department, section, created_by]);
+    .query(sql, [title, description, department, section, year, created_by]);
 };
 exports.getCoursesByAdmin = (adminId) => {
   const sql = "SELECT id, title FROM courses WHERE created_by = ?";

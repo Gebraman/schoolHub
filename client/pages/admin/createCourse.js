@@ -26,10 +26,11 @@ async function createCourse() {
   const description = document.getElementById("description").value;
   const department = document.getElementById("department").value;
   const section = document.getElementById("section").value;
+  const year = document.getElementById("year").value;
 
   const token = localStorage.getItem("token");
 
-  if (!title || !department || !section) {
+  if (!title || !department || !section || !year) {
     alert("Title, department and section are required");
     return;
   }
@@ -46,6 +47,7 @@ async function createCourse() {
         description,
         department,
         section,
+        year,
       }),
     });
 

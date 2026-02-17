@@ -21,6 +21,7 @@ async function register() {
     password: document.getElementById("password").value.trim(),
     department: document.getElementById("department").value,
     section: document.getElementById("section").value,
+    year: document.getElementById("year").value,
   };
 
   // Frontend validation (UX purpose only)

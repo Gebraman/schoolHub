@@ -40,6 +40,8 @@ const registerRoute = require("./routes/registerRoute");
 const loginRoute = require("./routes/loginRoute");
 const courseRoutes = require("./routes/courseRoutes");
 const materialRoutes = require("./routes/materialRoutes");
+const assignmentRoutes = require("./routes/assignmentRoutes");
+const scheduleRoutes = require("./routes/scheduleRoutes");
 
 app.use("/api/courses", courseRoutes);
 
@@ -48,6 +50,9 @@ app.use("/api/auth", loginRoute);
 
 app.use("/api/materials", materialRoutes);
 app.use("/uploads", express.static("uploads"));
+app.use("/api/assignments", assignmentRoutes);
+
+app.use("/api/schedule", scheduleRoutes);
 
 // Return JSON 404 for unknown API routes (helps clients parse errors)
 app.use("/api", (req, res) => {

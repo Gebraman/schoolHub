@@ -20,13 +20,14 @@ export async function renderAdminDashboard() {
     user.role === "super_admin" ? "All Departments" : user.department;
   document.getElementById("adminSection").textContent =
     user.role === "super_admin" ? "All Sections" : user.section;
+  document.getElementById("adminYear").textContent =
+    user.role === "super_admin" ? "All Years" : user.year;
 
   // Dashboard action buttons
   document.getElementById("openCreateCourseBtn").onclick = renderCreateCourse;
   document.getElementById("openMaterialBtn").onclick = renderUploadMaterial;
-  document.getElementById("uploadAssignmentBtn").onclick =
-    renderUploadAssignment;
-  document.getElementById("scheduleClassBtn").onclick = renderScheduleClass;
+  document.getElementById("openAssignmentBtn").onclick = renderUploadAssignment;
+  document.getElementById("openScheduleClassBtn").onclick = renderScheduleClass;
 
   /* ==============================
      PROFILE IMAGE PREVIEW LOGIC

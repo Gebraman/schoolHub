@@ -31,6 +31,7 @@ exports.login = async (req, res) => {
         firstName: user.firstName,
         department: user.department,
         section: user.section,
+        year: user.year,
       },
       process.env.JWT_SECRET,
       { expiresIn: "24h" },
@@ -45,6 +46,7 @@ exports.login = async (req, res) => {
         role: user.role,
         department: user.department,
         section: user.section,
+        year: user.year,
       },
     });
   } catch (err) {
