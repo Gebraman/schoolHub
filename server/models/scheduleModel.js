@@ -1,7 +1,7 @@
 // server/models/scheduleModel.js
 const db = require("../config/db");
 
-exports.createSchedule = ({
+exports.createSchedule = async ({
   course_id,
   department,
   section,
@@ -16,17 +16,15 @@ exports.createSchedule = ({
     (course_id, department, section, year, class_date, class_time, location, created_by)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `;
-
-  return db
-    .promise()
-    .query(sql, [
-      course_id,
-      department,
-      section,
-      year,
-      class_date,
-      class_time,
-      location,
-      created_by,
-    ]);
+  const [result] = await db.query(sql, [
+    course_id,
+    department,
+    section,
+    year,
+    class_date,
+    class_time,
+    location,
+    created_by,
+  ]);
+  return result;
 };

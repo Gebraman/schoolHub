@@ -1,5 +1,6 @@
 import { loadCSS } from "../../utils/loadCSS.js";
 import { renderAdminDashboard } from "../admin/dashboard.js";
+import { renderStudentLayout } from "../student/layout/studentLayout.js";
 
 export async function renderLogin() {
   const app = document.getElementById("app");
@@ -42,6 +43,8 @@ async function login() {
     // 🔀 Redirect based on role
     if (data.user.role === "admin") {
       renderAdminDashboard();
+    } else if (data.user.role === "student") {
+      renderStudentLayout();
     }
   } catch (err) {
     console.error("Login error:", err);

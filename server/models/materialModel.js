@@ -1,6 +1,6 @@
 const db = require("../config/db");
 
-exports.createMaterial = ({
+exports.createMaterial = async ({
   course_id,
   title,
   file_path,
@@ -11,8 +11,12 @@ exports.createMaterial = ({
     INSERT INTO materials (course_id, title, file_path, file_type, uploaded_by)
     VALUES (?, ?, ?, ?, ?)
   `;
-
-  return db
-    .promise()
-    .query(sql, [course_id, title, file_path, file_type, uploaded_by]);
+  const [result] = await db.query(sql, [
+    course_id,
+    title,
+    file_path,
+    file_type,
+    uploaded_by,
+  ]);
+  return result;
 };

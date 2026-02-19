@@ -139,3 +139,19 @@ body {
     margin-left: 260px;
   }
 }
+
+/* =============================
+   FORCE RESET — remove any blur or fade (MUST BE AT BOTTOM)
+============================= */
+
+#app {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+.student-layout,
+.student-main,
+.student-dashboard {
+  opacity: 1 !important;
+  filter: none !important;
+}

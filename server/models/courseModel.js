@@ -1,7 +1,7 @@
 // server/models/courseModel.js
 const db = require("../config/db");
 
-exports.createCourse = ({
+exports.createCourse = async ({
   title,
   description,
   department,
@@ -11,11 +11,19 @@ exports.createCourse = ({
 }) => {
   const sql =
     "INSERT INTO courses (title, description, department, section, year, created_by) VALUES (?, ?, ?, ?, ?, ?)";
-  return db
-    .promise()
-    .query(sql, [title, description, department, section, year, created_by]);
+  const [result] = await db.query(sql, [
+    title,
+    description,
+    department,
+    section,
+    year,
+    created_by,
+  ]);
+  return result;
 };
-exports.getCoursesByAdmin = (adminId) => {
+
+exports.getCoursesByAdmin = async (adminId) => {
   const sql = "SELECT id, title FROM courses WHERE created_by = ?";
-  return db.promise().query(sql, [adminId]);
+  const [rows] = await db.query(sql, [adminId]);
+  return rows;
 };

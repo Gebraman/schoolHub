@@ -1,3 +1,4 @@
+const db = require("../config/db");
 const Course = require("../models/courseModel");
 
 exports.createCourse = async (req, res) => {
@@ -62,11 +63,18 @@ exports.getAdminCourses = async (req, res) => {
   try {
     const user = req.user;
 
-    const [courses] = await Course.getCoursesByAdmin(user.id);
-
+    const courses = await Course.getCoursesByAdmin(user.id);
     res.json(courses);
   } catch (err) {
     console.error("GET COURSES ERROR:", err);
     res.status(500).json({ message: "Server error" });
   }
+};
+
+// Get courses for a student by department, year, and section
+exports.getStudentCourses = async ({ department, year, section }) => {
+  const sql =
+    "SELECT * FROM courses WHERE department = ? AND year = ? AND section = ?";
+  const [rows] = await db.query(sql, [department, year, section]);
+  return rows;
 };
