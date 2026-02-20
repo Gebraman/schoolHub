@@ -27,3 +27,9 @@ exports.getCoursesByAdmin = async (adminId) => {
   const [rows] = await db.query(sql, [adminId]);
   return rows;
 };
+exports.findById = async (materialId) => {
+  const [rows] = await db.query("SELECT * FROM materials WHERE id = ?", [
+    materialId,
+  ]);
+  return rows[0];
+};

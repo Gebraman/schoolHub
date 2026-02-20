@@ -1,5 +1,6 @@
 .student-courses h2 {
   margin-bottom: 20px;
+  background-color: black;
 }
 
 .courses-grid {
@@ -9,7 +10,7 @@
 }
 
 .course-card {
-  background: rgb(245, 240, 240);
+  background: rgb(8, 5, 5);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -26,7 +27,7 @@
 
 .course-card button {
   padding: 8px 12px;
-  background: #2563eb;
+  background: #25eb9c;
   color: white;
   border: none;
   border-radius: 6px;
@@ -35,4 +36,32 @@
 
 .course-card button:hover {
   background: #1d4ed8;
+}
+
+.material-buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column; /* This puts buttons vertically */
+  gap: 8px;
+}
+
+.material-buttons a {
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.open-btn {
+  background-color: #3498db;
+}
+
+.download-btn {
+  background-color: #2ecc71;
+}
+
+.material-buttons a:hover {
+  opacity: 0.85;
 }

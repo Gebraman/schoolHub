@@ -71,10 +71,44 @@ exports.getAdminCourses = async (req, res) => {
   }
 };
 
-// Get courses for a student by department, year, and section
-exports.getStudentCourses = async ({ department, year, section }) => {
-  const sql =
-    "SELECT * FROM courses WHERE department = ? AND year = ? AND section = ?";
-  const [rows] = await db.query(sql, [department, year, section]);
-  return rows;
+// exports.getStudentCourses = async (req, res) => {
+//   try {
+//     const { department, year, section } = req.user;
+
+//     const sql =
+//       "SELECT * FROM courses WHERE department = ? AND year = ? AND section = ?";
+
+//     const [rows] = await db.query(sql, [department, year, section]);
+
+//     res.json(rows);
+//   } catch (error) {
+//     console.error("Error fetching student courses:", error);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };
+
+exports.getStudentCourses = async (req, res) => {
+  try {
+    console.log("JWT USER:", req.user);
+
+    const department = req.user.department.trim();
+    const section = req.user.section.trim();
+    const year = parseInt(req.user.year); // 🔥 IMPORTANT
+
+    const sql = `
+      SELECT * FROM courses
+      WHERE department = ?
+      AND section = ?
+      AND year = ?
+    `;
+
+    const [rows] = await db.query(sql, [department, section, year]);
+
+    // console.log("Returned rows:", rows);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("ERROR:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 };

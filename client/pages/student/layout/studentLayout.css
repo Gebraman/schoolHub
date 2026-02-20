@@ -9,13 +9,13 @@
 .student-layout {
   display: flex;
   min-height: 100vh;
-  background: #f8fafc;
+  background: #021120;
 }
 
 /* Sidebar */
 .student-sidebar {
   width: 250px;
-  background: #1e293b;
+  background: #0449b9;
   color: white;
   padding: 20px;
 }
@@ -33,7 +33,7 @@
 }
 
 .student-sidebar li:hover {
-  background: #334155;
+  background: #1a2330;
 }
 
 .student-sidebar .logout {
@@ -44,7 +44,7 @@
 .student-main {
   flex: 1;
   padding: 30px;
-  background: #f8fafc;
+  background: #78350f;
 }
 
 /* Dashboard */
@@ -63,7 +63,7 @@
 
 .summary-card {
   flex: 1;
-  background: white;
+  background: rgb(107, 13, 13);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);

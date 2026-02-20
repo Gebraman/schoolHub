@@ -43,15 +43,17 @@ const materialRoutes = require("./routes/materialRoutes");
 const assignmentRoutes = require("./routes/assignmentRoutes");
 const scheduleRoutes = require("./routes/scheduleRoutes");
 const studentCourseRoutes = require("./routes/studentCourseRoutes");
+const studentMaterialRoutes = require("./routes/studentMaterialRoutes");
 
 app.use("/api/auth", registerRoute);
 app.use("/api/auth", loginRoute);
 app.use("/api/courses", courseRoutes);
 app.use("/api/materials", materialRoutes);
-app.use("/uploads", express.static("uploads"));
 app.use("/api/assignments", assignmentRoutes);
 app.use("/api/schedule", scheduleRoutes);
 app.use("/api/student/courses", studentCourseRoutes);
+app.use("/uploads", express.static("uploads"));
+app.use("/api/student/materials", studentMaterialRoutes);
 
 // Return JSON 404 for unknown API routes (helps clients parse errors)
 app.use("/api", (req, res) => {
