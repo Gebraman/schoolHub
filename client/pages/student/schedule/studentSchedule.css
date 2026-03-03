@@ -1,0 +1,70 @@
+/* ===== MAIN SCHEDULE SECTION ===== */
+.student-schedule {
+  padding: 35px;
+  color: #1c0303;
+  font-family: "Poppins", sans-serif;
+}
+
+.student-schedule h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.blink {
+  animation: blink-animation 2s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+  from,
+  to {
+    visibility: visible;
+  }
+  10% {
+    visibility: hidden;
+  }
+}
+
+/* ===== SCHEDULE GRID ===== */
+#scheduleList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* ===== SCHEDULE CARD ===== */
+.schedule-item {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 25px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
+}
+
+.schedule-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 255, 174, 0.25);
+}
+
+.schedule-item h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #04160e;
+}
+
+.schedule-item p {
+  margin-bottom: 6px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-message {
+  opacity: 0.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .student-schedule {
+    padding: 20px;
+  }
+}

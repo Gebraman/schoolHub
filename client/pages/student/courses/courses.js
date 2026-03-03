@@ -91,22 +91,6 @@ async function viewCourse(courseId) {
           materials.length === 0
             ? "<p>No materials available.</p>"
             : materials
-                //               .map(
-                //                 (m) => `
-                //   <div class="material-card">
-                //     <h3>${m.title}</h3>
-
-                //     <a href="http://localhost:3000/${m.file_path.replace(/\\\\/g, "/")}" target="_blank">
-                //       📥 Download
-                //     </a>
-                //   </div>
-                // `,
-                //               )
-
-                //               .join("")
-                //       }
-                //     </div>
-                //   `;
 
                 .map(
                   (m) => `

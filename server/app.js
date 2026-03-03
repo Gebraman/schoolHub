@@ -44,6 +44,10 @@ const assignmentRoutes = require("./routes/assignmentRoutes");
 const scheduleRoutes = require("./routes/scheduleRoutes");
 const studentCourseRoutes = require("./routes/studentCourseRoutes");
 const studentMaterialRoutes = require("./routes/studentMaterialRoutes");
+const studentAssignmentRoutes = require("./routes/studentAssignmentRoutes");
+const contactRoutes = require("./routes/contactRoutes");
+
+app.use("/api/contact", contactRoutes);
 
 app.use("/api/auth", registerRoute);
 app.use("/api/auth", loginRoute);
@@ -54,6 +58,7 @@ app.use("/api/schedule", scheduleRoutes);
 app.use("/api/student/courses", studentCourseRoutes);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/student/materials", studentMaterialRoutes);
+app.use("/api/student/assignments", studentAssignmentRoutes);
 
 // Return JSON 404 for unknown API routes (helps clients parse errors)
 app.use("/api", (req, res) => {

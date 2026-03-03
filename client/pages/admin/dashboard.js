@@ -16,38 +16,60 @@ export async function renderAdminDashboard() {
 
   document.getElementById("adminName").textContent = user.firstName;
   document.getElementById("adminRole").textContent = user.role;
-  document.getElementById("adminDepartment").textContent =
-    user.role === "super_admin" ? "All Departments" : user.department;
-  document.getElementById("adminSection").textContent =
-    user.role === "super_admin" ? "All Sections" : user.section;
-  document.getElementById("adminYear").textContent =
-    user.role === "super_admin" ? "All Years" : user.year;
+  document.getElementById("adminDepartment").textContent = user.department;
+  document.getElementById("adminSection").textContent = user.section;
+  document.getElementById("adminYear").textContent = user.year;
 
-  // Dashboard action buttons
+  // ================= DASHBOARD BUTTONS =================
   document.getElementById("openCreateCourseBtn").onclick = renderCreateCourse;
   document.getElementById("openMaterialBtn").onclick = renderUploadMaterial;
   document.getElementById("openAssignmentBtn").onclick = renderUploadAssignment;
   document.getElementById("openScheduleClassBtn").onclick = renderScheduleClass;
 
-  /* ==============================
-     PROFILE IMAGE PREVIEW LOGIC
-     ============================== */
+  // ================= SIDEBAR TOGGLE =================
+  const sidebar = document.getElementById("adminSidebar");
+  const openBtn = document.getElementById("openSidebarBtn");
+  const closeBtn = document.getElementById("closeSidebarBtn");
 
+  if (openBtn) {
+    openBtn.addEventListener("click", () => {
+      sidebar.classList.add("active");
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
+  }
+
+  // ================= ACTIVE MENU HIGHLIGHT =================
+  const menuItems = document.querySelectorAll(".menu-item");
+
+  menuItems.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      menuItems.forEach((item) => item.classList.remove("active"));
+      this.classList.add("active");
+
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove("active");
+      }
+    });
+  });
+
+  // ================= PROFILE IMAGE LOGIC =================
   const profileInput = document.getElementById("profileInput");
   const adminAvatar = document.getElementById("adminAvatar");
 
-  // Load saved image from localStorage
   const savedImage = localStorage.getItem("adminProfileImage");
   if (savedImage) {
     adminAvatar.src = savedImage;
   }
 
-  // Click image → open file picker
   adminAvatar.addEventListener("click", () => {
     profileInput.click();
   });
 
-  // Preview and save image
   profileInput.addEventListener("change", (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -55,10 +77,10 @@ export async function renderAdminDashboard() {
     const reader = new FileReader();
     reader.onload = function (e) {
       adminAvatar.src = e.target.result;
-
-      // Save to localStorage
       localStorage.setItem("adminProfileImage", e.target.result);
     };
     reader.readAsDataURL(file);
   });
+  //default
+  renderCreateCourse();
 }

@@ -1,13 +1,25 @@
 <section class="student-layout">
-  <aside class="student-sidebar">
-    <h2 class="logo">🎓 EduSphere</h2>
+  <!-- MOBILE TOP BAR -->
+  <div class="student-mobile-header">
+    <button id="sidebarToggle">☰</button>
+    <h2>Student Panel</h2>
+  </div>
 
-    <ul>
-      <li id="studentNavDashboard">Dashboard</li>
-      <li id="studentNavCourses">Courses</li>
-      <li id="studentNavAssignments">Assignments</li>
-      <li id="studentNavSchedule">Schedule</li>
-      <li id="studentNavLogout" class="logout">Logout</li>
+  <aside class="student-sidebar" id="studentSidebar">
+    <button class="close-btn" id="closeSidebar">✖</button>
+
+    <div class="student-profile">
+      <img id="studentAvatar" src="/images/default-profile.png" />
+      <h3 id="studentName"></h3>
+      <p>Student Panel</p>
+    </div>
+
+    <ul class="student-menu">
+      <li class="menu-item active" id="studentNavDashboard">📊 Dashboard</li>
+      <li class="menu-item" id="studentNavCourses">📘 Courses</li>
+      <li class="menu-item" id="studentNavAssignments">📝 Assignments</li>
+      <li class="menu-item" id="studentNavSchedule">🗓 Schedule</li>
+      <li id="studentNavLogout" class="logout">🚪 Logout</li>
     </ul>
   </aside>
 

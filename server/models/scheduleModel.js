@@ -28,3 +28,15 @@ exports.createSchedule = async ({
   ]);
   return result;
 };
+exports.getSchedulesByFilter = async ({ department, section, year }) => {
+  const result = await db.query(
+    `SELECT * FROM class_schedules
+     WHERE department = ?
+     AND section = ?
+     AND year = ?
+     ORDER BY class_date ASC`,
+    [department, section, year],
+  );
+
+  return result[0];
+};

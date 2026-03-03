@@ -1,6 +1,6 @@
 .student-courses h2 {
   margin-bottom: 20px;
-  background-color: black;
+  background-color: rgb(245, 242, 250);
 }
 
 .courses-grid {
@@ -10,7 +10,7 @@
 }
 
 .course-card {
-  background: rgb(8, 5, 5);
+  background: #1d4ed8(218, 199, 201);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);

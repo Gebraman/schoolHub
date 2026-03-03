@@ -1,0 +1,95 @@
+/* ===== MAIN SECTION ===== */
+.student-assignments {
+  padding: 35px;
+  font-family: "Poppins", sans-serif;
+  color: #090b9b;
+}
+
+/* Header */
+.assignment-header {
+  margin-bottom: 30px;
+  background-color: #2563eb;
+}
+
+.assignment-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* ===== GRID CONTAINER ===== */
+#assignmentContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* ===== ASSIGNMENT CARD ===== */
+.assignment-card {
+  /* background: rgba(24, 24, 24, 0.906); */
+  padding: 25px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.assignment-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 100px rgba(66, 208, 5, 0.25);
+}
+
+.assignment-card h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+/* ===== DEADLINE ===== */
+.deadline {
+  font-weight: 500;
+  margin-bottom: 18px;
+  color: #ff6b6b;
+}
+
+/* ===== BUTTONS ===== */
+.assignment-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.assignment-buttons a {
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  transition: 0.3s;
+}
+
+.open-btn {
+  background-color: #2563eb;
+}
+
+.download-btn {
+  background-color: #16a34a;
+}
+
+.assignment-buttons a:hover {
+  opacity: 0.85;
+}
+
+/* ===== EMPTY MESSAGE ===== */
+.empty-message {
+  opacity: 0.7;
+  font-size: 15px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .student-assignments {
+    padding: 20px;
+  }
+}

@@ -37,3 +37,19 @@ exports.scheduleClass = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+exports.getSchedulesForStudent = async (req, res) => {
+  try {
+    const user = req.user;
+
+    const schedules = await Schedule.getSchedulesByFilter({
+      department: user.department,
+      section: user.section,
+      year: user.year,
+    });
+
+    res.json(schedules);
+  } catch (err) {
+    console.error("FETCH SCHEDULE ERROR:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};

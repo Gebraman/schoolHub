@@ -1,4 +1,6 @@
 import { renderHome } from "./pages/home/home.js";
+import { renderAbout } from "./pages/public/about/about.js";
+import { renderContact } from "./pages/public/contact/contact.js";
 import { renderLogin } from "./pages/auth/login.js";
 import { renderRegister } from "./pages/auth/register.js";
 import { renderAdminDashboard } from "./pages/admin/dashboard.js";
@@ -6,6 +8,8 @@ import { renderStudentLayout } from "./pages/student/layout/studentLayout.js";
 
 // Navbar routing
 document.getElementById("navHome").onclick = renderHome;
+document.getElementById("navAbout").onclick = renderAbout;
+document.getElementById("navContact").onclick = renderContact;
 document.getElementById("navLogin").onclick = renderLogin;
 document.getElementById("navRegister").onclick = renderRegister;
 

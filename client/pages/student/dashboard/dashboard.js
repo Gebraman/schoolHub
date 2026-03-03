@@ -11,13 +11,19 @@ export async function renderStudentDashboard() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   // Fill user info
-  document.getElementById("studentName").textContent = user.firstName;
-  document.getElementById("studentRole").textContent = user.role;
-  document.getElementById("studentDepartment").textContent = user.department;
-  document.getElementById("studentSection").textContent = user.section;
-  document.getElementById("studentYear").textContent = user.year;
+  document.getElementById("studentName").textContent =
+    user.firstName || "Student";
 
-  // Temporary static counts (we connect API later)
+  document.getElementById("studentRole").textContent = user.role || "-";
+
+  document.getElementById("studentDepartment").textContent =
+    user.department || "-";
+
+  document.getElementById("studentSection").textContent = user.section || "-";
+
+  document.getElementById("studentYear").textContent = user.year || "-";
+
+  // Temporary placeholders (connect API later)
   document.getElementById("courseCount").textContent = "-";
   document.getElementById("assignmentCount").textContent = "-";
   document.getElementById("scheduleCount").textContent = "-";
