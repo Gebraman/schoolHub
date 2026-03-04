@@ -71,44 +71,82 @@ exports.getAdminCourses = async (req, res) => {
   }
 };
 
-// exports.getStudentCourses = async (req, res) => {
-//   try {
-//     const { department, year, section } = req.user;
-
-//     const sql =
-//       "SELECT * FROM courses WHERE department = ? AND year = ? AND section = ?";
-
-//     const [rows] = await db.query(sql, [department, year, section]);
-
-//     res.json(rows);
-//   } catch (error) {
-//     console.error("Error fetching student courses:", error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
-
 exports.getStudentCourses = async (req, res) => {
   try {
     console.log("JWT USER:", req.user);
 
     const department = req.user.department.trim();
-    const section = req.user.section.trim();
+    // const section = req.user.section.trim();
     const year = parseInt(req.user.year); // 🔥 IMPORTANT
 
     const sql = `
       SELECT * FROM courses
       WHERE department = ?
-      AND section = ?
       AND year = ?
     `;
 
-    const [rows] = await db.query(sql, [department, section, year]);
-
-    // console.log("Returned rows:", rows);
+    const [rows] = await db.query(sql, [department, year]);
 
     res.json(rows);
   } catch (error) {
     console.error("ERROR:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+exports.getAdminDepartmentCourses = async (req, res) => {
+  try {
+    // Check role
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
+    const department = req.user.department;
+    const year = req.user.year;
+    const [courses] = await db.execute(
+      "SELECT * FROM courses WHERE department = ? AND year = ?",
+      [department, year],
+    );
+
+    res.json(courses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+exports.getAdminCourseDetails = async (req, res) => {
+  try {
+    const courseId = req.params.id;
+    const department = req.user.department;
+    const year = req.user.year;
+    // 1️⃣ Get course (must belong to admin department)
+    const [course] = await db.execute(
+      "SELECT * FROM courses WHERE id = ? AND department = ? AND year = ?",
+      [courseId, department, year],
+    );
+
+    if (!course.length) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    // 2️⃣ Get materials
+    const [materials] = await db.execute(
+      "SELECT * FROM materials WHERE course_id = ?",
+      [courseId],
+    );
+
+    // 3️⃣ Get assignments
+    const [assignments] = await db.execute(
+      "SELECT * FROM assignments WHERE course_id = ?",
+      [courseId],
+    );
+
+    res.json({
+      course: course[0],
+      materials,
+      assignments,
+    });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };

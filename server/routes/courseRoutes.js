@@ -6,6 +6,12 @@ const role = require("../middleware/roleMiddleware");
 const controller = require("../controllers/courseController");
 
 router.post("/", auth, role("admin"), controller.createCourse);
-router.get("/", auth, role("admin"), controller.getAdminCourses);
+
+// All courses (if you still need it)
+router.get("/all", auth, role("admin"), controller.getAdminCourses);
+
+// Department-based courses (the one we want)
+router.get("/", auth, role("admin"), controller.getAdminDepartmentCourses);
+router.get("/:id", auth, role("admin"), controller.getAdminCourseDetails);
 
 module.exports = router;
