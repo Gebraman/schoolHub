@@ -1,74 +1,76 @@
+/* PAGE BACKGROUND */
 .schedule-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
+  min-height: 100vh;
   font-family: system-ui, sans-serif;
+  background: linear-gradient(135deg, #1e293b, #334155, #7c2d12);
 }
 
+/* CARD */
 .schedule-card {
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
   background: #ffffff;
-  padding: 36px;
-  border-radius: 18px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
-  animation: fadeInUp 0.45s ease;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
+/* TITLE */
 .schedule-card h2 {
-  margin-bottom: 10px;
-  color: #1f2937;
+  margin-bottom: 8px;
+  color: #1e293b;
+  font-weight: 700;
 }
 
+/* HINT TEXT */
 .hint {
   font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 22px;
+  color: #64748b;
+  margin-bottom: 28px;
 }
 
+/* INPUTS */
 .schedule-card input[type="text"],
 .schedule-card input[type="date"],
 .schedule-card input[type="time"],
 .schedule-card select {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 16px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
   border-radius: 12px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #cbd5e1;
   font-size: 14px;
+  background: #f8fafc;
+  transition: 0.2s ease;
 }
 
-.schedule-card select {
-  background: #f9fafb;
+/* FOCUS */
+.schedule-card input:focus,
+.schedule-card select:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+  background: #ffffff;
 }
 
+/* BUTTON */
 .schedule-card button {
   width: 100%;
-  padding: 14px;
+  padding: 15px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, #f97316, #ea580c);
   color: #ffffff;
   font-weight: 700;
   cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: 0.2s ease;
+  margin-top: 10px;
 }
 
 .schedule-card button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background: linear-gradient(135deg, #ea580c, #c2410c);
 }

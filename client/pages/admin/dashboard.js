@@ -2,6 +2,7 @@ import { renderCreateCourse } from "./createCourse.js";
 import { renderUploadMaterial } from "./uploadMaterial.js";
 import { renderUploadAssignment } from "./uploadAssignment.js";
 import { renderScheduleClass } from "./scheduleClass.js";
+import { renderAdminCourses } from "./adminCourses.js";
 import { loadCSS } from "../../utils/loadCSS.js";
 
 export async function renderAdminDashboard() {
@@ -25,6 +26,7 @@ export async function renderAdminDashboard() {
   document.getElementById("openMaterialBtn").onclick = renderUploadMaterial;
   document.getElementById("openAssignmentBtn").onclick = renderUploadAssignment;
   document.getElementById("openScheduleClassBtn").onclick = renderScheduleClass;
+  document.getElementById("openAdminCoursesBtn").onclick = renderAdminCourses;
 
   // ================= SIDEBAR TOGGLE =================
   const sidebar = document.getElementById("adminSidebar");

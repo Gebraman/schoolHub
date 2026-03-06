@@ -1,46 +1,199 @@
-/* ---------------- RESPONSIVE CONTROL ---------------- */
+/* =========================
+   HERO SECTION
+========================= */
 
-/* Large Desktop */
-@media (min-width: 1440px) {
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.home-hero {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 40px;
+  color: white;
+
+  /* Background image + soft sunset overlay */
+
+  background:
+    linear-gradient(rgba(255, 140, 80, 0.35), rgba(255, 120, 60, 0.35)),
+    url("/schoolHub/client/pages/assets/u.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  animation: sunsetGlow 12s ease-in-out infinite alternate;
+}
+
+/* Soft sunset animation */
+
+@keyframes sunsetGlow {
+  0% {
+    background:
+      linear-gradient(rgba(255, 140, 80, 0.3), rgba(255, 120, 60, 0.3)),
+      url("/schoolHub/client/pages/assets/u.png");
+  }
+
+  100% {
+    background:
+      linear-gradient(rgba(255, 110, 70, 0.4), rgba(255, 100, 50, 0.4)),
+      url("/schoolHub/client/pages/assets/u.png");
   }
 }
 
-/* Laptop */
-@media (max-width: 1200px) {
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+/* =========================
+   GLASS HERO CONTAINER
+========================= */
+
+.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+
+  padding: 40px;
+  border-radius: 18px;
+
+  max-width: 700px;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
 }
 
-/* Tablet */
-@media (max-width: 992px) {
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+/* =========================
+   HERO TEXT
+========================= */
+
+.hero-title {
+  font-size: 50px;
+  font-weight: 800;
+  margin-bottom: 18px;
 }
 
-/* Mobile */
+.hero-title span {
+  color: #ffe5d0;
+}
+
+.hero-text {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* =========================
+   HERO BUTTONS
+========================= */
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: #ea580c;
+  border: none;
+
+  padding: 12px 26px;
+  border-radius: 8px;
+
+  color: rgb(25, 5, 5);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #c2410c;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid white;
+
+  padding: 12px 26px;
+  border-radius: 8px;
+
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: white;
+  color: #ea580c;
+}
+
+/* =========================
+   ABOUT SECTION
+========================= */
+
+.about-section {
+  padding: 80px 10%;
+
+  background: #fff7ed;
+  color: black;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.about-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+
+  padding: 30px;
+  border-radius: 14px;
+}
+
+.about-card h2 {
+  margin-bottom: 15px;
+  color: #ea580c;
+}
+
+.about-card p {
+  line-height: 1.7;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  background: #1e293b;
+  color: white;
+
+  text-align: center;
+
+  padding: 40px 20px;
+}
+
+.footer h3 {
+  margin-bottom: 10px;
+}
+
+.footer p {
+  opacity: 0.8;
+}
+
+.copyright {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 768px) {
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  .hero-title {
+    font-size: 36px;
   }
-}
 
-/* Small Mobile */
-@media (max-width: 480px) {
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
   }
 }

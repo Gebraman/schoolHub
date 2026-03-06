@@ -1,33 +1,51 @@
+/* =============================
+   STUDENT LAYOUT
+============================= */
+
 .student-layout {
   display: flex;
   min-height: 100vh;
-  background: #2169c6;
+
+  /* 🌅 Deep Sunset Background */
+  background: linear-gradient(135deg, #0f172a, #1e293b);
 }
 
-/* ===== SIDEBAR ===== */
+/* =============================
+   SIDEBAR
+============================= */
+
 .student-sidebar {
   width: 260px;
-  background: #0b3d91;
-  color: white;
-  padding: 25px 20px;
+
+  /* Deep sunset sidebar */
+  background: linear-gradient(180deg, #0f172a, #7c2d12);
+
+  color: #f1f5f9;
+  padding: 30px 22px;
   display: flex;
   flex-direction: column;
+  box-shadow: 5px 0 25px rgba(0, 0, 0, 0.4);
 }
 
+/* Profile Section */
 .student-profile {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .student-profile img {
-  width: 90px;
-  height: 90px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+
+  /* Sunset border ring */
+  border: 3px solid #f97316;
 }
 
 .student-profile h3 {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+  font-weight: 700;
 }
 
 .student-profile p {
@@ -35,79 +53,110 @@
   opacity: 0.8;
 }
 
-/* Menu */
+/* =============================
+   MENU
+============================= */
+
 .student-menu {
   list-style: none;
   padding: 0;
 }
 
 .student-menu li {
-  padding: 12px 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.25s ease;
+  font-weight: 500;
 }
 
+/* Hover */
 .student-menu li:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(249, 115, 22, 0.15);
 }
 
+/* Active Item */
 .menu-item.active {
-  background: white;
-  color: #0b3d91;
-  font-weight: bold;
+  background: linear-gradient(135deg, #f97316, #c2410c);
+  color: white;
+  font-weight: 700;
 }
 
-/* Logout */
+/* =============================
+   LOGOUT
+============================= */
+
 .logout {
-  background: #dc2626;
-  margin-top: 20px;
+  margin-top: auto;
+  padding: 13px;
+  border-radius: 12px;
   text-align: center;
+  cursor: pointer;
+
+  /* Strong sunset red tone */
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  color: white;
+  font-weight: 600;
+  transition: 0.25s ease;
 }
 
 .logout:hover {
-  background: #b91c1c;
+  background: linear-gradient(135deg, #b91c1c, #7f1d1d);
 }
 
-/* ===== MAIN ===== */
+/* =============================
+   MAIN CONTENT
+============================= */
+
 .student-main {
   flex: 1;
-  padding: 30px;
-  background: #a5f3fc;
+  padding: 40px;
+
+  /* Soft light surface */
+  background: #f8fafc;
+  color: #1e293b;
 }
 
-/* ===== MOBILE HEADER ===== */
+/* =============================
+   MOBILE HEADER
+============================= */
+
 .student-mobile-header {
   display: none;
-  background: #0b3d91;
+
+  background: linear-gradient(90deg, #0f172a, #7c2d12);
   color: white;
-  padding: 15px;
+  padding: 15px 20px;
   align-items: center;
   gap: 15px;
 }
 
 .student-mobile-header button {
-  background: white;
+  background: #f97316;
   border: none;
   font-size: 20px;
-  padding: 5px 10px;
-  border-radius: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
   cursor: pointer;
+  color: white;
 }
 
-/* Close button inside sidebar */
+/* Close Button */
 .close-btn {
   display: none;
   background: none;
   border: none;
-  color: rgb(15, 3, 3);
-  font-size: 22px;
+  color: #f97316;
+  font-size: 24px;
   align-self: flex-end;
   cursor: pointer;
 }
 
-/* ===== MOBILE RESPONSIVE ===== */
+/* =============================
+   MOBILE RESPONSIVE
+============================= */
+
 @media (max-width: 768px) {
   .student-layout {
     flex-direction: column;
@@ -135,6 +184,6 @@
   }
 
   .student-main {
-    padding: 20px;
+    padding: 25px;
   }
 }

@@ -1,34 +1,40 @@
+/* PAGE BACKGROUND */
 .course-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e293b, #334155, #7c2d12);
   font-family: system-ui, sans-serif;
 }
 
+/* CARD */
 .course-card {
   width: 100%;
-  max-width: 420px;
-  background: hsl(0, 23%, 91%);
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-  animation: fadeInUp 0.4s ease;
+  max-width: 500px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
-.course-card h2 {
+/* HEADER */
+.course-header h2 {
   margin-bottom: 6px;
-  color: #1f2937;
+  color: #1e293b;
+  font-weight: 700;
 }
 
-.course-card p {
+.course-header p {
   font-size: 14px;
-  color: #ebeced;
-  margin-bottom: 20px;
+  color: #64748b;
+  margin-bottom: 30px;
 }
 
+/* FORM GROUP */
 .form-group {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -36,70 +42,67 @@
 .form-group label {
   font-size: 14px;
   margin-bottom: 6px;
-  color: #374151;
+  color: #334155;
+  font-weight: 500;
 }
 
+/* INPUTS */
 .course-card input,
 .course-card select,
 .course-card textarea {
   width: 100%;
-  padding: 12px;
+  padding: 12px 14px;
   border-radius: 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #cbd5e1;
   font-size: 14px;
-  background: #ffffff;
+  background: #f8fafc;
   transition: 0.2s ease;
 }
 
 .course-card textarea {
-  min-height: 90px;
+  min-height: 100px;
   resize: vertical;
 }
 
+/* FOCUS EFFECT */
 .course-card input:focus,
 .course-card select:focus,
 .course-card textarea:focus {
   outline: none;
-  border-color: #10b981;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
+  border-color: #f97316;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+  background: #ffffff;
 }
 
+/* ROW */
 .form-row {
   display: flex;
-  gap: 12px;
+  gap: 14px;
 }
 
 .form-row .form-group {
   flex: 1;
 }
 
+/* BUTTON */
 #createCourseBtn {
   width: 100%;
   padding: 14px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, #f97316, #ea580c);
   color: #ffffff;
   font-weight: 700;
   cursor: pointer;
   transition: 0.2s ease;
+  margin-top: 10px;
 }
 
 #createCourseBtn:hover {
-  opacity: 0.95;
+  background: linear-gradient(135deg, #ea580c, #c2410c);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* RESPONSIVE */
 @media (max-width: 480px) {
   .form-row {
     flex-direction: column;

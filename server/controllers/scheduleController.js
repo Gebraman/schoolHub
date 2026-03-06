@@ -45,6 +45,7 @@ exports.getSchedulesForStudent = async (req, res) => {
       department: user.department,
       section: user.section,
       year: user.year,
+      course_id: user.course_id,
     });
 
     res.json(schedules);

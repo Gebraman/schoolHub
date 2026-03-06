@@ -1,67 +1,100 @@
+/* =============================
+   STUDENT COURSES SECTION
+============================= */
+
 .student-courses h2 {
-  margin-bottom: 20px;
-  background-color: rgb(245, 242, 250);
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #f97316; /* 🌅 Sunset Accent */
 }
+
+/* =============================
+   COURSES GRID
+============================= */
 
 .courses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
 }
+
+/* =============================
+   COURSE CARD
+============================= */
 
 .course-card {
-  background: #1d4ed8(218, 199, 201);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 18px;
+
+  /* Premium shadow */
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+
+  /* 🌅 Left Accent Border */
+  border-left: 6px solid #f97316;
+
+  transition: 0.25s ease;
 }
 
+.course-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(249, 115, 22, 0.25);
+}
+
+/* Title */
 .course-card h3 {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
 }
 
+/* Description */
 .course-card p {
   font-size: 14px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  color: #475569;
 }
 
-.course-card button {
-  padding: 8px 12px;
-  background: #25eb9c;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.course-card button:hover {
-  background: #1d4ed8;
-}
+/* =============================
+   MATERIAL BUTTONS
+============================= */
 
 .material-buttons {
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
-  flex-direction: column; /* This puts buttons vertically */
-  gap: 8px;
+  flex-direction: column;
+  gap: 10px;
 }
 
+/* Shared button style */
 .material-buttons a {
   text-decoration: none;
-  padding: 8px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 10px;
   text-align: center;
   color: white;
-  font-weight: bold;
+  font-weight: 600;
+  transition: 0.25s ease;
 }
 
+/* 🌅 Open Button */
 .open-btn {
-  background-color: #3498db;
+  background: linear-gradient(135deg, #f97316, #c2410c);
 }
 
+.open-btn:hover {
+  background: linear-gradient(135deg, #ea580c, #9a3412);
+  transform: translateY(-2px);
+}
+
+/* 🌅 Download Button */
 .download-btn {
-  background-color: #2ecc71;
+  background: linear-gradient(135deg, #7c2d12, #431407);
 }
 
-.material-buttons a:hover {
-  opacity: 0.85;
+.download-btn:hover {
+  background: linear-gradient(135deg, #9a3412, #5b1a0a);
+  transform: translateY(-2px);
 }

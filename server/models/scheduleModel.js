@@ -28,13 +28,36 @@ exports.createSchedule = async ({
   ]);
   return result;
 };
+// exports.getSchedulesByFilter = async ({
+//   course_id,
+//   department,
+//   section,
+//   year,
+// }) => {
+//   const result = await db.query(
+//     `SELECT * FROM class_schedules
+//      WHERE course_id = ?
+//      AND department = ?
+//      AND section = ?
+//      AND year = ?
+//      ORDER BY class_date ASC`,
+//     [course_id, department, section, year],
+//   );
+
+//   return result[0];
+// };
+
 exports.getSchedulesByFilter = async ({ department, section, year }) => {
   const result = await db.query(
-    `SELECT * FROM class_schedules
-     WHERE department = ?
-     AND section = ?
-     AND year = ?
-     ORDER BY class_date ASC`,
+    `SELECT 
+        cs.*,
+        c.title AS course_title
+     FROM class_schedules cs
+     JOIN courses c ON cs.course_id = c.id
+     WHERE cs.department = ?
+     AND cs.section = ?
+     AND cs.year = ?
+     ORDER BY cs.class_date ASC`,
     [department, section, year],
   );
 

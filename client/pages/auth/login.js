@@ -1,4 +1,6 @@
+import { subscribeUser } from "../../utils/pushNotifications.js";
 import { loadCSS } from "../../utils/loadCSS.js";
+import { renderRegister } from "./register.js";
 import { renderAdminDashboard } from "../admin/dashboard.js";
 import { renderStudentLayout } from "../student/layout/studentLayout.js";
 
@@ -17,6 +19,7 @@ export async function renderLogin() {
 
   // 4. Attach logic
   document.getElementById("loginBtn").onclick = login;
+  document.getElementById("goRegister").onclick = renderRegister;
 }
 async function login() {
   try {
@@ -39,6 +42,7 @@ async function login() {
     // ✅ MUST store BOTH token and user
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
+    subscribeUser(); // 🔔 subscribe to push notifications
 
     // 🔀 Redirect based on role
     if (data.user.role === "admin") {

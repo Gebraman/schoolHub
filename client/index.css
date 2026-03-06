@@ -1,3 +1,6 @@
+/* =============================
+   GLOBAL RESET
+============================= */
 *,
 *::before,
 *::after {
@@ -13,56 +16,66 @@ body {
     "Segoe UI",
     Roboto,
     sans-serif;
-  background-color: #525252;
-  color: #1f2933;
+
+  /* 🌅 Intense sunset background */
+  background: linear-gradient(135deg, #0f172a, #1e293b, #9a3412);
+  color: #f1f5f9;
 }
 
+/* =============================
+   NAVBAR
+============================= */
+
 #navbar {
-  background-color: #020617;
-  padding: 0px 0px;
+  background: linear-gradient(90deg, #0f172a, #7c2d12);
+  padding: 0 30px;
+  height: 65px;
+  display: flex;
+  align-items: center;
 }
 
 #navList {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 45px;
   list-style: none;
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 60px;
 }
 
+/* Menu Items */
 #navList li {
-  color: #ede3ed;
+  color: #e2e8f0;
   font-weight: 600;
   cursor: pointer;
   position: relative;
   padding: 6px 2px;
-  transition: color 0.25s ease;
+  transition: 0.25s ease;
 }
 
 #navList li:hover {
-  color: #e7e8ebfa;
+  color: #f97316;
 }
 
+/* Active item - Sunset Accent */
 #navList li.active {
-  color: #60a5fa;
+  color: #f97316;
 }
 
 #navList li.active::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -6px;
+  bottom: -8px;
   width: 100%;
-  height: 2px;
-  background-color: #60a5fa;
-  border-radius: 2px;
+  height: 3px;
+  background: linear-gradient(90deg, #f97316, #ea580c);
+  border-radius: 3px;
 }
 
 /* =============================
-   HAMBURGER BASE
+   HAMBURGER
 ============================= */
 
 #hamburger {
@@ -76,7 +89,7 @@ body {
 #hamburger span {
   width: 30px;
   height: 3px;
-  background: white;
+  background: #f97316;
   border-radius: 3px;
   transition: all 0.3s ease;
 }
@@ -100,9 +113,7 @@ body {
 
 @media (max-width: 768px) {
   #navbar {
-    display: flex;
-    align-items: center;
-    padding: 20px;
+    justify-content: space-between;
   }
 
   #hamburger {
@@ -112,15 +123,18 @@ body {
   #navList {
     position: fixed;
     top: 0;
-    left: -260px;
+    left: -270px;
     height: 100vh;
-    width: 260px;
-    background: #0f172a;
+    width: 270px;
+
+    /* 🌅 Deep sunset sidebar */
+    background: linear-gradient(180deg, #0f172a, #7c2d12);
+
     flex-direction: column;
-    padding: 100px 25px;
-    gap: 25px;
+    padding: 100px 30px;
+    gap: 30px;
     transition: left 0.35s ease;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
   }
 
   #navList.show {
@@ -128,7 +142,6 @@ body {
   }
 
   #navList li {
-    color: white;
     font-size: 18px;
   }
 
@@ -138,12 +151,12 @@ body {
   }
 
   body.menu-open #app {
-    margin-left: 260px;
+    margin-left: 270px;
   }
 }
 
 /* =============================
-   FORCE RESET — remove any blur or fade (MUST BE AT BOTTOM)
+   FORCE RESET
 ============================= */
 
 #app {

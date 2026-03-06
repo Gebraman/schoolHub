@@ -1,98 +1,179 @@
+/* =============================
+   STUDENT DASHBOARD
+============================= */
+
 .student-dashboard {
   min-height: 100vh;
-  padding: 40px;
+  padding: 50px;
   font-family: "Poppins", sans-serif;
-  /* background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); */
-  color: #ffffff;
+
+  /* Light surface for readability */
+  background: #f8fafc;
+  color: #1e293b;
 }
 
-/* ===== HERO ===== */
+/* =============================
+   HERO SECTION
+============================= */
+
 .dashboard-hero {
-  margin-bottom: 40px;
+  margin-bottom: 45px;
 }
 
 .dashboard-hero h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
+  font-size: 30px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+/* =============================
+   STUDENT INFO CARD – SUNSET VERSION
+============================= */
+
+.student-info-card {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 20px;
+
+  /* 🌅 Sunset Accent Border */
+  border-left: 6px solid #f97316;
+
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+  margin-bottom: 45px;
 }
 
+/* Each Info Block */
+.info-item {
+  flex: 1;
+  min-width: 160px;
+  padding: 10px 15px;
+  border-radius: 12px;
+  transition: 0.25s ease;
+}
+
+/* Label (Role, Department...) */
+.info-item span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f97316; /* 🌅 Sunset label */
+  display: block;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Value (Student, Economics, etc.) */
+.info-item strong {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Hover effect */
+.info-item:hover {
+  background: rgba(249, 115, 22, 0.08);
+}
+
+/* Student Name Accent */
 #studentName {
-  color: #00ffae;
+  color: #f97316; /* 🌅 Sunset Accent */
 }
 
 .welcome-text {
-  max-width: 600px;
-  opacity: 0.85;
-  line-height: 1.6;
+  max-width: 620px;
+  line-height: 1.7;
   font-size: 15px;
+  color: #475569;
 }
 
-/* ===== INFO CARD ===== */
+/* =============================
+   INFO CARD
+============================= */
+
 .student-info-card {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   flex-wrap: wrap;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 25px;
-  border-radius: 14px;
-  backdrop-filter: blur(10px);
-  margin-bottom: 40px;
+
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 18px;
+
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+  margin-bottom: 45px;
 }
 
 .info-item {
   flex: 1;
-  min-width: 150px;
+  min-width: 160px;
 }
 
 .info-item span {
   font-size: 13px;
-  opacity: 0.7;
+  color: #64748b;
   display: block;
+  margin-bottom: 5px;
 }
 
 .info-item strong {
   font-size: 16px;
+  color: #1e293b;
 }
 
-/* ===== SUMMARY CARDS ===== */
+/* =============================
+   SUMMARY CARDS
+============================= */
+
 .student-summary-cards {
   display: flex;
-  gap: 25px;
+  gap: 30px;
   flex-wrap: wrap;
 }
 
 .summary-card {
   flex: 1;
-  min-width: 220px;
-  padding: 30px;
-  border-radius: 16px;
+  min-width: 230px;
+  padding: 35px;
+  border-radius: 20px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  transition: 0.3s ease;
+
+  background: #ffffff;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+
+  transition: 0.25s ease;
   cursor: pointer;
 }
 
+/* Hover Effect */
 .summary-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 255, 174, 0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(249, 115, 22, 0.25);
 }
 
+/* Card Title */
 .summary-card h3 {
   margin-bottom: 15px;
-  font-weight: 500;
+  font-weight: 600;
+  color: #475569;
 }
 
+/* Number */
 .summary-card p {
-  font-size: 36px;
-  font-weight: bold;
-  color: #00ffae;
+  font-size: 40px;
+  font-weight: 800;
+  color: #f97316; /* Sunset Accent */
 }
 
-/* ===== RESPONSIVE ===== */
+/* =============================
+   RESPONSIVE
+============================= */
+
 @media (max-width: 768px) {
   .student-dashboard {
-    padding: 25px;
+    padding: 30px;
   }
 
   .student-info-card {

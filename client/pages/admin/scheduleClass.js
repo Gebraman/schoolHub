@@ -18,7 +18,6 @@ export async function renderScheduleClass() {
 
   document.getElementById("scheduleClassBtn").onclick = scheduleClass;
 
-  // ✅ Smooth scroll
   setTimeout(() => {
     const card = document.querySelector(".schedule-card");
     if (card) {
@@ -94,9 +93,8 @@ async function scheduleClass() {
       return;
     }
 
-    alert("✅ Class scheduled successfully");
+    alert("Class scheduled successfully");
 
-    // ✅ Clear form
     document.getElementById("scheduleCourse").value = "";
     document.getElementById("classDate").value = "";
     document.getElementById("classTime").value = "";

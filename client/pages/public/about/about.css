@@ -1,66 +1,85 @@
-/* About Section Styles */
+/* =============================
+   ABOUT SECTION – INTENSE SUNSET
+============================= */
+
 .about {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 60px 20px;
+  max-width: 950px;
+  margin: 80px auto;
+  padding: 70px 40px;
   font-family: "Inter", "Segoe UI", sans-serif;
-  color: #222; /* Dark gray for professional look */
-  background-color: #f9f9f9; /* Soft background to make content stand out */
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  /* 🌅 Intense deep sunset background */
+  background: linear-gradient(135deg, #0f172a, #1e293b, #9a3412);
+
+  color: #f1f5f9;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
   text-align: center;
 }
 
+/* Title */
 .about h2 {
   font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #1a1a1a;
+  font-weight: 800;
+  margin-bottom: 25px;
   letter-spacing: 1px;
+
+  /* Sunset accent title */
+  color: #f97316;
 }
 
+/* Paragraph */
 .about p {
   font-size: 1.1rem;
-  line-height: 1.8;
-  margin-bottom: 20px;
-  color: #555;
-  max-width: 700px;
+  line-height: 1.9;
+  margin-bottom: 22px;
+  color: #e2e8f0;
+  max-width: 720px;
   margin-left: auto;
   margin-right: auto;
 }
 
+/* =============================
+   HIGHLIGHT BOX
+============================= */
+
 .about-highlight {
-  margin-top: 40px;
-  padding: 30px 25px;
-  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
-  color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  margin-top: 50px;
+  padding: 35px 30px;
+
+  /* Strong Sunset Gradient */
+  background: linear-gradient(135deg, #f97316, #c2410c);
+
+  color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  transition: 0.3s ease;
 }
 
 .about-highlight h3 {
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   margin-bottom: 15px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .about-highlight p {
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
+/* Subtle Professional Hover */
 .about-highlight:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
 }
 
-/* Responsive Design */
+/* =============================
+   RESPONSIVE
+============================= */
+
 @media (max-width: 768px) {
   .about {
-    padding: 40px 15px;
+    padding: 50px 25px;
   }
 
   .about h2 {
@@ -68,7 +87,7 @@
   }
 
   .about-highlight {
-    padding: 25px 20px;
+    padding: 28px 22px;
   }
 }
 
@@ -78,7 +97,7 @@
   }
 
   .about-highlight h3 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .about p,

@@ -1,95 +1,127 @@
+/* ================= LAYOUT ================= */
 .admin-layout {
   display: flex;
   min-height: 100vh;
   width: 100%;
+  background: #f8fafc;
 }
 
 /* ================= SIDEBAR ================= */
 .admin-sidebar {
-  width: 260px;
-  background: #0b3d91; /* AAU Blue */
+  width: 270px;
+  background: linear-gradient(180deg, #1e293b, #7c2d12);
   color: white;
   padding: 20px;
-  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
+
+  /* ✅ FIX SCROLL ISSUE */
+  height: 100vh;
+  overflow-y: auto;
 }
 
+/* Sidebar header */
 .sidebar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* ================= PROFILE ================= */
 .admin-profile-mini {
   text-align: center;
-  margin: 20px 0;
+  margin: 25px 0;
 }
 
 .admin-profile-mini img {
-  width: 90px;
-  height: 90px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
-  border: 3px solid white;
+
+  /* 🌅 Sunset Ring */
+  border: 4px solid #f97316;
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+  transition: 0.3s ease;
 }
 
-/* Menu */
+.admin-profile-mini img:hover {
+  transform: scale(1.05);
+}
+
+/* Profile text */
+.admin-profile-mini h3 {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.admin-profile-mini p {
+  font-size: 13px;
+  opacity: 0.85;
+  margin: 2px 0;
+}
+
+/* ================= MENU ================= */
 .admin-menu {
   margin-top: 20px;
 }
 
 .admin-menu button {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
   border: none;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
   color: white;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.25s ease;
   text-align: left;
+  font-size: 14px;
 }
 
 .admin-menu button:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(249, 115, 22, 0.3);
 }
 
 /* Active highlight */
 .menu-item.active {
-  background: white;
-  color: #0b3d91;
-  font-weight: bold;
+  background: #f97316;
+  color: white;
+  font-weight: 600;
 }
 
 /* ================= MAIN ================= */
 .admin-main {
   flex: 1;
-  background: #f3f4f6;
+  background: #f1f5f9;
   padding: 30px;
-  overflow-y: auto;
-  color: #111;
+  overflow-y: auto; /* ✅ scroll fix */
+  height: 100vh; /* ✅ scroll fix */
 }
 
-/* Mobile menu button */
+/* ================= MOBILE MENU BUTTON ================= */
 .mobile-menu-btn {
   display: none;
-  background: #0b3d91;
+  background: #f97316;
   color: white;
   border: none;
   padding: 10px 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   margin-bottom: 15px;
 }
 
-/* ================= MOBILE ================= */
+/* ================= MOBILE FIX ================= */
 @media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
   .admin-sidebar {
     position: fixed;
-    height: 100%;
+    height: 100vh;
     left: 0;
     top: 0;
     transform: translateX(-100%);
@@ -106,5 +138,12 @@
 
   .mobile-menu-btn {
     display: inline-block;
+  }
+
+  /* ✅ IMPORTANT SCROLL FIX */
+  .admin-main {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
   }
 }

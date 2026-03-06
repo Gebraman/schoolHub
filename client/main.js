@@ -70,5 +70,25 @@ function updateNavbar() {
   }
 }
 
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/utils/pushNotifications.js")
+    .then(() => {
+      console.log("Service Worker Registered");
+    })
+    .catch((err) => {
+      console.error("SW error:", err);
+    });
+  if ("Notification" in window) {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        console.log("Notification permission granted.");
+      } else {
+        console.log("Notification permission denied.");
+      }
+    });
+  }
+}
+
 updateNavbar();
 renderHome();

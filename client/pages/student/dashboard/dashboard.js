@@ -22,9 +22,4 @@ export async function renderStudentDashboard() {
   document.getElementById("studentSection").textContent = user.section || "-";
 
   document.getElementById("studentYear").textContent = user.year || "-";
-
-  // Temporary placeholders (connect API later)
-  document.getElementById("courseCount").textContent = "-";
-  document.getElementById("assignmentCount").textContent = "-";
-  document.getElementById("scheduleCount").textContent = "-";
 }
