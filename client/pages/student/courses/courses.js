@@ -107,6 +107,7 @@ async function viewCourse(courseId) {
         </a>
 
         <a 
+
           href="http://localhost:3000/${m.file_path.replace(/\\\\/g, "/")}" 
           download
           class="download-btn"

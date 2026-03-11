@@ -74,3 +74,63 @@
 .schedule-card button:hover {
   background: linear-gradient(135deg, #ea580c, #c2410c);
 }
+
+/* Style for date and time inputs */
+input[type="date"],
+input[type="time"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 5px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  background: #f8fafc;
+  transition: 0.2s ease;
+  font-family: system-ui, sans-serif;
+}
+
+/* Style the calendar picker icon */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  color: #f97316;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* Style placeholder text */
+input[type="date"]::before,
+input[type="time"]::before {
+  content: attr(placeholder);
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* Hide placeholder when value is set */
+input[type="date"]:valid::before,
+input[type="time"]:valid::before {
+  display: none;
+}
+
+/* Field hint styling */
+.field-hint {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  padding-left: 5px;
+}
+
+/* Form group spacing */
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #334155;
+  font-size: 14px;
+}

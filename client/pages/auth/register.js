@@ -1,10 +1,12 @@
 import { loadCSS } from "../../utils/loadCSS.js";
 import { renderLogin } from "./login.js";
+import notifications from "../../utils/notifications.js";
 
 export async function renderRegister() {
   const app = document.getElementById("app");
 
   loadCSS("./pages/auth/register.css");
+  await loadCSS("../../utils/notifications.css");
 
   const res = await fetch("./pages/auth/register.html");
   app.innerHTML = await res.text();
@@ -27,7 +29,7 @@ async function register() {
   // Frontend validation (UX purpose only)
   for (let key in formData) {
     if (!formData[key]) {
-      alert("All fields are required");
+      notifications.warning("All fields are required", "Missing Information");
       return;
     }
   }
@@ -42,14 +44,18 @@ async function register() {
     const data = await response.json();
 
     if (!response.ok) {
-      alert(data.message || "Registration failed");
+      notifications.error(data.message || "Registration failed", "Error");
       return;
     }
 
-    alert("Registration successful. Please login.");
-    renderLogin(); // ✅ Correct flow
+    notifications.success("Registration successful! Please login.", "Welcome!");
+
+    // Small delay before redirect so user sees success message
+    setTimeout(() => {
+      renderLogin(); // ✅ Correct flow
+    }, 1500);
   } catch (error) {
     console.error("Register error:", error);
-    alert("Unable to connect to server.");
+    notifications.error("Unable to connect to server.", "Connection Error");
   }
 }

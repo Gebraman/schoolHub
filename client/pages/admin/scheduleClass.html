@@ -10,14 +10,31 @@
       <option value="">Select Course</option>
     </select>
 
-    <input type="date" id="classDate" />
+    <div class="form-group">
+      <label for="classDate">📅 Class Date:</label>
+      <input type="date" id="classDate" class="date-input" required />
+      <small class="field-hint">Select the date for this class</small>
+    </div>
 
-    <input type="time" id="classTime" />
+    <div class="form-group">
+      <label for="classTime">⏰ Class Time:</label>
+      <input type="time" id="classTime" class="time-input" required />
+      <small class="field-hint">24-hour format (e.g., 09:00, 14:30)</small>
+    </div>
 
     <input
       type="text"
       id="classLocation"
       placeholder="Room number or Online meeting link"
+    />
+
+    <!-- NEW: Department field (auto-filled from admin's department) -->
+    <input
+      type="text"
+      id="department"
+      readonly
+      placeholder="Department (auto-filled)"
+      style="background-color: #f0f0f0; cursor: not-allowed"
     />
 
     <select id="section">
@@ -32,6 +49,15 @@
       <option value="8">Section 8</option>
       <option value="9">Section 9</option>
       <option value="10">Section 10</option>
+    </select>
+
+    <!-- NEW: Year field -->
+    <select id="year" required>
+      <option value="">Select Year</option>
+      <option value="2024">2024</option>
+      <option value="2025">2025</option>
+      <option value="2026">2026</option>
+      <option value="2027">2027</option>
     </select>
 
     <button id="scheduleClassBtn">Schedule Class</button>

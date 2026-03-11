@@ -31,7 +31,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client")));
 
 const port = process.env.PORT || 3000;
-
+app.get("/ping", (req, res) => {
+  res.send("pong");
+});
 app.get("/", (req, res) => {
   res.send("the schoolhub server is running here");
 });
@@ -46,7 +48,7 @@ const studentCourseRoutes = require("./routes/studentCourseRoutes");
 const studentMaterialRoutes = require("./routes/studentMaterialRoutes");
 const studentAssignmentRoutes = require("./routes/studentAssignmentRoutes");
 const contactRoutes = require("./routes/contactRoutes");
-const pushRoutes = require("./routes/pushRoutes");
+const reminderJob = require("./jobs/classReminderJob");
 
 app.use("/api/contact", contactRoutes);
 
@@ -61,8 +63,34 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/student/materials", studentMaterialRoutes);
 app.use("/api/student/assignments", studentAssignmentRoutes);
 require("./jobs/clearOldSchedules");
-require("./jobs/classReminderJob");
-app.use("/api/push", pushRoutes);
+// Push notification routes
+app.post("/api/push/subscribe", async (req, res) => {
+  try {
+    const { subscription, department, section, year } = req.body;
+
+    // Get user info from JWT token (you have this in your auth)
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    // Verify token and get user (you can reuse your existing auth)
+    const jwt = require("jsonwebtoken");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const id = await reminderJob.addSubscription(
+      subscription,
+      department,
+      section,
+      year,
+    );
+
+    res.json({ success: true, subscriptionId: id });
+  } catch (error) {
+    console.error("Subscription error:", error);
+    res.status(500).json({ message: "Subscription failed" });
+  }
+});
 
 // Return JSON 404 for unknown API routes (helps clients parse errors)
 app.use("/api", (req, res) => {
@@ -76,6 +104,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "Internal server error" });
 });
 
-app.listen(port, () => {
-  console.log(`the schoolhub server is running on port ${port}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`The SchoolHub server is running on port ${port}`);
+  reminderJob.startReminderJob(1);
 });

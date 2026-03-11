@@ -1,10 +1,12 @@
 import { loadCSS } from "../../utils/loadCSS.js";
+import notifications from "../../utils/notifications.js";
 
 export async function renderUploadAssignment() {
   const adminContent = document.getElementById("adminContent");
 
   // Load CSS
   await loadCSS("./pages/admin/uploadAssignment.css");
+  await loadCSS("../../utils/notifications.css");
 
   // Load HTML
   const res = await fetch("./pages/admin/uploadAssignment.html");
@@ -17,7 +19,7 @@ export async function renderUploadAssignment() {
   // Attach event
   document.getElementById("uploadAssignmentBtn").onclick = uploadAssignment;
 
-  //  Smooth scroll into view
+  // Smooth scroll into view
   setTimeout(() => {
     const card = document.querySelector(".assignment-card");
     if (card) {
@@ -65,7 +67,10 @@ async function uploadAssignment() {
   const token = localStorage.getItem("token");
 
   if (!courseId || !title || !deadline || !file) {
-    alert("Please fill all fields");
+    notifications.warning(
+      "Please fill all fields and select a file",
+      "Missing Information",
+    );
     return;
   }
 
@@ -87,11 +92,11 @@ async function uploadAssignment() {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message || "Upload failed");
+      notifications.error(data.message || "Upload failed", "Error");
       return;
     }
 
-    alert("Assignment uploaded successfully");
+    notifications.success("Assignment uploaded successfully", "Success");
 
     document.getElementById("assignmentCourse").value = "";
     document.getElementById("assignmentTitle").value = "";
@@ -99,6 +104,6 @@ async function uploadAssignment() {
     document.getElementById("assignmentFile").value = "";
   } catch (err) {
     console.error("Upload error:", err);
-    alert("Server error");
+    notifications.error("Server error. Please try again.", "Error");
   }
 }

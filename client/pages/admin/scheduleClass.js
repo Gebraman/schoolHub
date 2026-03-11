@@ -1,4 +1,5 @@
 import { loadCSS } from "../../utils/loadCSS.js";
+import notifications from "../../utils/notifications.js";
 
 export async function renderScheduleClass() {
   const adminContent = document.getElementById("adminContent");
@@ -9,12 +10,20 @@ export async function renderScheduleClass() {
   }
 
   await loadCSS("./pages/admin/scheduleClass.css");
+  await loadCSS("../../utils/notifications.css");
 
   const res = await fetch("./pages/admin/scheduleClass.html");
   const html = await res.text();
   adminContent.innerHTML = html;
 
   await loadCourses();
+
+  // Auto-fill department from logged-in admin
+  const user = JSON.parse(localStorage.getItem("user"));
+  const deptField = document.getElementById("department");
+  if (deptField && user?.department) {
+    deptField.value = user.department;
+  }
 
   document.getElementById("scheduleClassBtn").onclick = scheduleClass;
 
@@ -61,12 +70,23 @@ async function scheduleClass() {
   const date = document.getElementById("classDate").value;
   const time = document.getElementById("classTime").value;
   const location = document.getElementById("classLocation").value.trim();
+  const department = document.getElementById("department").value;
   const section = document.getElementById("section").value;
+  const year = document.getElementById("year").value;
 
   const token = localStorage.getItem("token");
 
-  if (!courseId || !date || !time || !location || !section) {
-    alert("Please fill all fields");
+  // Validate all fields
+  if (
+    !courseId ||
+    !date ||
+    !time ||
+    !location ||
+    !department ||
+    !section ||
+    !year
+  ) {
+    notifications.warning("Please fill all fields", "Missing Information");
     return;
   }
 
@@ -82,26 +102,35 @@ async function scheduleClass() {
         class_date: date,
         class_time: time,
         location: location,
+        department: department,
         section: section,
+        year: year,
       }),
     });
 
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message || "Schedule failed");
+      notifications.error(data.message || "Schedule failed", "Error");
       return;
     }
 
-    alert("Class scheduled successfully");
+    notifications.success(
+      "Class scheduled successfully! Students will be notified 5 minutes before class.",
+      "Success",
+      5000,
+    );
 
+    // Clear form
     document.getElementById("scheduleCourse").value = "";
     document.getElementById("classDate").value = "";
     document.getElementById("classTime").value = "";
     document.getElementById("classLocation").value = "";
+    // Department field stays auto-filled
     document.getElementById("section").value = "";
+    document.getElementById("year").value = "";
   } catch (err) {
     console.error("Schedule error:", err);
-    alert("Server error");
+    notifications.error("Server error. Please try again.", "Error");
   }
 }

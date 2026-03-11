@@ -5,4 +5,10 @@ UPDATE users SET role = 'admin' WHERE email = 'endeshawegebremedhin@gmail.com';
 '9', 'Endeshaw', 'Melese', 'endeshawegebremedhin@gmail.com', '$2b$10$N/EP1mBxdHUXCxj0dFu3GugLh7qyw52aXWO9eWen1gw8dBgpWpunC', 'Economics', '2', 'admin', '2026-02-07 13:03:13'
 '14', 'getent', 'Endeshawe', 'getenet@gmail.com', '$2b$10$x7oPrB4hdH20KuCLmDT8HuKqh/qrH8fjzAZ9dscb8J8n2x9ZfV4ci', 'Management', '5', '1', 'admin', '2026-02-17 14:43:56'
 
+ip
+10.9.223.209
+Public Key:
+BFzSHaRE0EQ5VUlxu7GVhuL8sig7JJTHWu8Iy8OKcz-8Kk4X-o2qG4-iqFOwiLTT6pMfSRDxt9kgU0s12Zwnix8
 
+Private Key:
+V7AH-OL7El7iQ_x5gcjxiOWXuLQ5tRT_-RZ9-SC4O3Y

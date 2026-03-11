@@ -1,7 +1,3 @@
-/* =============================
-   STUDENT DASHBOARD
-============================= */
-
 .student-dashboard {
   min-height: 100vh;
   padding: 50px;
@@ -11,10 +7,6 @@
   background: #f8fafc;
   color: #1e293b;
 }
-
-/* =============================
-   HERO SECTION
-============================= */
 
 .dashboard-hero {
   margin-bottom: 45px;

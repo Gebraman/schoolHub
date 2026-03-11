@@ -5,6 +5,7 @@ import { renderLogin } from "./pages/auth/login.js";
 import { renderRegister } from "./pages/auth/register.js";
 import { renderAdminDashboard } from "./pages/admin/dashboard.js";
 import { renderStudentLayout } from "./pages/student/layout/studentLayout.js";
+import notifications from "./utils/notifications.js"; // Add this line
 
 // Navbar routing
 document.getElementById("navHome").onclick = renderHome;
@@ -16,8 +17,12 @@ document.getElementById("navRegister").onclick = renderRegister;
 document.getElementById("navLogout").onclick = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-  updateNavbar();
+
+  // Show logout notification
+  notifications.info("You have been logged out", "Goodbye!", 2000);
+
   renderHome();
+  updateNavbar();
 };
 
 // Mobile menu
@@ -29,6 +34,12 @@ hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("active");
   navList.classList.toggle("show");
   document.body.classList.toggle("menu-open");
+
+  // Debug log
+  console.log(
+    "Menu toggled:",
+    navList.classList.contains("show") ? "open" : "closed",
+  );
 });
 
 navItems.forEach((item) => {
@@ -47,7 +58,7 @@ function updateNavbar() {
   const navDashboard = document.getElementById("navDashboard");
   const navLogout = document.getElementById("navLogout");
 
-  // 🔥 Always clean mobile state
+  // Always clean mobile state
   document.body.classList.remove("menu-open");
   document.getElementById("app").style.marginLeft = "0";
 
@@ -62,6 +73,18 @@ function updateNavbar() {
     } else if (user.role === "student") {
       navDashboard.onclick = renderStudentLayout;
     }
+
+    // Welcome back notification (only once per session)
+    if (!sessionStorage.getItem("welcomeShown")) {
+      setTimeout(() => {
+        notifications.success(
+          `Welcome back, ${user.firstName || "User"}!`,
+          "👋 Hello",
+          3000,
+        );
+        sessionStorage.setItem("welcomeShown", "true");
+      }, 1000);
+    }
   } else {
     navLogin.style.display = "inline-block";
     navRegister.style.display = "inline-block";
@@ -70,25 +93,159 @@ function updateNavbar() {
   }
 }
 
+// ========== PUSH NOTIFICATION CODE ==========
+
+// Register Service Worker
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("/utils/pushNotifications.js")
-    .then(() => {
-      console.log("Service Worker Registered");
+    .register("sw.js")
+    .then((registration) => {
+      console.log("✅ Service Worker Registered");
     })
-    .catch((err) => {
-      console.error("SW error:", err);
+    .catch((error) => {
+      console.error("❌ Service Worker registration failed:", error);
+      notifications.error(
+        "Failed to register notifications",
+        "Service Worker Error",
+      );
     });
-  if ("Notification" in window) {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        console.log("Notification permission granted.");
-      } else {
-        console.log("Notification permission denied.");
-      }
+}
+
+// Helper function to convert VAPID key
+function urlBase64ToUint8Array(base64String) {
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, "+")
+    .replace(/_/g, "/");
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+// Subscribe to push notifications
+async function subscribeToPushNotifications() {
+  try {
+    const registration = await navigator.serviceWorker.ready;
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = localStorage.getItem("token");
+
+    if (!user || !token || user.role !== "student") {
+      console.log("⏭️ Skipping push subscription: User not eligible");
+      return;
+    }
+
+    if (!user.department || !user.section || !user.year) {
+      console.log(
+        "⚠️ User missing department/section/year for push subscription",
+      );
+      return;
+    }
+
+    const subscription = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(
+        "BFzSHaRE0EQ5VUlxu7GVhuL8sig7JJTHWu8Iy8OKcz-8Kk4X-o2qG4-iqFOwiLTT6pMfSRDxt9kgU0s12Zwnix8",
+      ),
     });
+
+    const response = await fetch("http://localhost:3000/api/push/subscribe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        subscription,
+        department: user.department,
+        section: user.section,
+        year: user.year,
+      }),
+    });
+
+    if (response.ok) {
+      console.log("✅ Successfully subscribed to push notifications");
+      notifications.success(
+        "You'll receive class reminders!",
+        "Notifications Enabled",
+        3000,
+      );
+    } else {
+      console.error("❌ Server rejected subscription");
+      notifications.error(
+        "Failed to enable notifications",
+        "Subscription Error",
+      );
+    }
+  } catch (error) {
+    console.error("❌ Push subscription failed:", error);
   }
 }
 
+// Request notification permission and subscribe
+async function requestNotificationPermission() {
+  if (!("Notification" in window)) {
+    console.log("❌ This browser does not support notifications");
+    notifications.warning(
+      "Your browser doesn't support notifications",
+      "Not Available",
+    );
+    return false;
+  }
+
+  const permission = Notification.permission;
+
+  if (permission === "granted") {
+    console.log("✅ Notification permission already granted");
+    await subscribeToPushNotifications();
+    return true;
+  }
+
+  if (permission === "denied") {
+    console.log("❌ Notification permission denied");
+    notifications.error(
+      "Please enable notifications in browser settings to receive class reminders",
+      "Permission Denied",
+      5000,
+    );
+    return false;
+  }
+
+  try {
+    const result = await Notification.requestPermission();
+    if (result === "granted") {
+      console.log("✅ Notification permission granted");
+      notifications.success(
+        "Thanks! You'll now receive class reminders",
+        "Notifications Enabled",
+        4000,
+      );
+      await subscribeToPushNotifications();
+      return true;
+    } else {
+      console.log("❌ Notification permission denied");
+      return false;
+    }
+  } catch (error) {
+    console.error("❌ Error requesting notification permission:", error);
+    return false;
+  }
+}
+
+// Check for existing subscription on login
+window.addEventListener("storage", (event) => {
+  if (event.key === "user" || event.key === "token") {
+    if (localStorage.getItem("user") && Notification.permission === "granted") {
+      subscribeToPushNotifications();
+    }
+  }
+});
+
+// ========== START THE APP ==========
 updateNavbar();
 renderHome();
+
+// Request notification permission
+requestNotificationPermission();

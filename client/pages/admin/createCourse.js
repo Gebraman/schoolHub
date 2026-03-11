@@ -1,10 +1,11 @@
 import { loadCSS } from "../../utils/loadCSS.js";
+import notifications from "../../utils/notifications.js";
 
 export async function renderCreateCourse() {
   const adminContent = document.getElementById("adminContent");
 
   await loadCSS("./pages/admin/createCourse.css");
-
+  await loadCSS("../../utils/notifications.css");
   const res = await fetch("./pages/admin/createCourse.html");
   const html = await res.text();
   adminContent.innerHTML = html;
@@ -31,7 +32,10 @@ async function createCourse() {
   const token = localStorage.getItem("token");
 
   if (!title || !department || !section || !year) {
-    alert("Title, department and section are required");
+    notifications.warning(
+      "Please fill in all required fields",
+      "Missing Information",
+    );
     return;
   }
 
@@ -54,13 +58,20 @@ async function createCourse() {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message || "Failed to create course");
+      notifications.error(data.message || "Failed to create course", "Error");
       return;
     }
 
-    alert("Course created successfully");
+    notifications.success("Course created successfully", "Success");
+
+    // Clear form
+    document.getElementById("title").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("department").value = "";
+    document.getElementById("section").value = "";
+    document.getElementById("year").value = "";
   } catch (err) {
     console.error(err);
-    alert("Server error");
+    notifications.error("Server error. Please try again.", "Error");
   }
 }

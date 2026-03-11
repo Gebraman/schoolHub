@@ -1,10 +1,12 @@
 import { loadCSS } from "../../utils/loadCSS.js";
+import notifications from "../../utils/notifications.js";
 
 export async function renderUploadMaterial() {
   const adminContent = document.getElementById("adminContent");
 
   // Load CSS
   await loadCSS("./pages/admin/uploadMaterial.css");
+  await loadCSS("../../utils/notifications.css");
 
   // Load HTML
   const res = await fetch("./pages/admin/uploadMaterial.html");
@@ -34,7 +36,10 @@ async function uploadMaterial() {
   const token = localStorage.getItem("token");
 
   if (!courseId || !title || !file) {
-    alert("Please select course, title and file");
+    notifications.warning(
+      "Please select course, title and file",
+      "Missing Information",
+    );
     return;
   }
 
@@ -55,14 +60,19 @@ async function uploadMaterial() {
     const data = await res.json();
 
     if (!res.ok) {
-      alert(data.message || "Upload failed");
+      notifications.error(data.message || "Upload failed", "Error");
       return;
     }
 
-    alert("✅ Material uploaded successfully");
+    notifications.success("Material uploaded successfully", "Success");
+
+    // Clear form
+    document.getElementById("materialCourse").value = "";
+    document.getElementById("materialTitle").value = "";
+    document.getElementById("materialFile").value = "";
   } catch (err) {
     console.error(err);
-    alert("Server error");
+    notifications.error("Server error. Please try again.", "Error");
   }
 }
 
@@ -79,6 +89,7 @@ async function loadCourses() {
     const courses = await res.json();
 
     const select = document.getElementById("materialCourse");
+    select.innerHTML = '<option value="">Select Course</option>';
 
     courses.forEach((course) => {
       const option = document.createElement("option");

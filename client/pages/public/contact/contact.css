@@ -1,106 +1,369 @@
-/* ===== CONTACT SECTION WRAPPER ===== */
+/* =============================
+   CONTACT SECTION
+============================= */
+
 .contact-section {
-  position: relative;
-  padding: 110px 20px;
-  text-align: center;
-
-  /* 🌅 Intense Deep Sunset Background */
-  background: linear-gradient(135deg, #0f172a, #1e293b, #9a3412);
-
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
   color: #f1f5f9;
+  animation: fadeIn 0.8s ease;
+  position: relative;
 }
 
-/* ===== Heading ===== */
 .contact-section h2 {
-  font-size: 2.7rem;
-  margin-bottom: 15px;
-  font-weight: 800;
-  color: #f97316; /* Sunset Accent */
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  position: relative;
 }
 
-/* ===== Paragraph ===== */
-.contact-section p {
-  max-width: 620px;
-  margin: 0 auto 35px auto;
+.contact-section h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #f97316, #ea580c);
+  border-radius: 2px;
+}
+
+.contact-section > p {
+  text-align: center;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 40px;
   font-size: 1.1rem;
-  color: #e2e8f0;
-  line-height: 1.8;
 }
 
-/* ===== Form Styling ===== */
+/* =============================
+   CONTACT FORM
+============================= */
+
 #contactForm {
-  max-width: 520px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(249, 115, 22, 0.1);
+  margin-bottom: 50px;
 }
 
-/* ===== Inputs & Textarea ===== */
 #contactForm input,
 #contactForm textarea {
-  padding: 15px 18px;
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(249, 115, 22, 0.3);
   border-radius: 12px;
-  border: 1px solid #334155;
+  color: #f1f5f9;
   font-size: 1rem;
-  outline: none;
-  background: #f8fafc;
-  transition: 0.25s ease;
+  transition: all 0.3s ease;
 }
 
-/* Focus Effect – Strong Sunset */
 #contactForm input:focus,
 #contactForm textarea:focus {
+  outline: none;
   border-color: #f97316;
-  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.35);
-  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* ===== Textarea Height ===== */
+#contactForm input::placeholder,
+#contactForm textarea::placeholder {
+  color: #94a3b8;
+}
+
 #contactForm textarea {
-  min-height: 130px;
+  min-height: 150px;
   resize: vertical;
 }
 
-/* ===== Button Styling ===== */
 #contactForm button {
-  padding: 15px;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
   border: none;
-  border-radius: 14px;
-
-  /* 🌅 Strong Sunset Button */
-  background: linear-gradient(135deg, #f97316, #c2410c);
-
+  border-radius: 12px;
   color: white;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.25s ease;
-}
-
-/* Hover Effect */
-#contactForm button:hover {
-  background: linear-gradient(135deg, #ea580c, #9a3412);
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
-}
-
-/* ===== Status Message ===== */
-#contactStatus {
-  margin-top: 25px;
+  font-size: 1.1rem;
   font-weight: 600;
-  font-size: 1rem;
-  min-height: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#contactForm button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+#contactForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+}
+
+#contactForm button:hover::before {
+  left: 100%;
+}
+
+#contactStatus {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 500;
   color: #f97316;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 600px) {
+/* =============================
+   SOCIAL MEDIA LINKS WITH REAL ICONS
+============================= */
+
+.social-links {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.social-links h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.social-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 25px 35px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  border-radius: 20px;
+  color: #f1f5f9;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-icon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.2),
+    rgba(234, 88, 12, 0.2)
+  );
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+.social-icon:hover {
+  transform: translateY(-8px) scale(1.05);
+  border-color: #f97316;
+  box-shadow: 0 20px 30px -10px rgba(249, 115, 22, 0.4);
+}
+
+.social-icon:hover::before {
+  transform: translateY(0);
+}
+
+/* Real icon styling */
+.social-icon-img {
+  width: 40px;
+  height: 40px;
+  filter: brightness(0) invert(1); /* Makes white icons */
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Platform-specific hover effects */
+.social-icon.telegram:hover .social-icon-img {
+  filter: brightness(0) saturate(100%) invert(55%) sepia(98%) saturate(2778%)
+    hue-rotate(176deg) brightness(102%) contrast(105%);
+}
+
+.social-icon.email:hover .social-icon-img {
+  filter: brightness(0) saturate(100%) invert(56%) sepia(81%) saturate(1490%)
+    hue-rotate(346deg) brightness(101%) contrast(98%);
+}
+
+.social-icon.youtube:hover .social-icon-img {
+  filter: brightness(0) saturate(100%) invert(20%) sepia(96%) saturate(7483%)
+    hue-rotate(357deg) brightness(96%) contrast(117%);
+}
+
+.social-icon.instagram:hover .social-icon-img {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(77%) saturate(2021%)
+    hue-rotate(291deg) brightness(97%) contrast(104%);
+}
+
+.social-icon .channel-name {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  background: rgba(249, 115, 22, 0.15);
+  border-radius: 30px;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.social-icon:hover .channel-name {
+  background: rgba(249, 115, 22, 0.25);
+  border-color: #f97316;
+}
+
+.social-note {
+  margin-top: 20px;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 10px 25px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 30px;
+  display: inline-block;
+  border: 1px solid rgba(249, 115, 22, 0.1);
+}
+
+/* =============================
+   SUNSET GLOW EFFECT
+============================= */
+
+.contact-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 70% 30%,
+    rgba(249, 115, 22, 0.03) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* =============================
+   ANIMATIONS
+============================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =============================
+   RESPONSIVE DESIGN
+============================= */
+
+@media (max-width: 768px) {
   .contact-section {
-    padding: 80px 20px;
+    padding: 20px 15px;
   }
 
   .contact-section h2 {
-    font-size: 2.1rem;
+    font-size: 2rem;
+  }
+
+  #contactForm {
+    padding: 25px;
+  }
+
+  .social-icons {
+    gap: 15px;
+  }
+
+  .social-icon {
+    padding: 20px 25px;
+    min-width: 140px;
+  }
+
+  .social-icon-img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .social-icon .channel-name {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-icons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-icon {
+    width: 100%;
+    max-width: 280px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 15px 20px;
+  }
+
+  .social-icon-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  .social-icon .channel-name {
+    font-size: 0.9rem;
+  }
+
+  .social-note {
+    font-size: 0.8rem;
+    padding: 8px 15px;
   }
 }
