@@ -12,12 +12,15 @@ webpush.setVapidDetails(
 
 // Check for upcoming classes and send reminders
 
+// Check for upcoming classes and send reminders
 async function checkUpcomingClasses() {
   console.log("\n🔍 Checking for upcoming classes...");
 
   try {
     const now = new Date();
-    const fiveMinutesLater = new Date(now.getTime() + 5 * 60000);
+
+    // 🔥 CHANGED: From 5 minutes to 20 minutes
+    const twentyMinutesLater = new Date(now.getTime() + 20 * 60000);
 
     // Get current time in 24-hour format for MySQL
     const currentTime =
@@ -27,20 +30,23 @@ async function checkUpcomingClasses() {
       ":" +
       now.getSeconds().toString().padStart(2, "0");
 
+    // 🔥 CHANGED: Using twentyMinutesLater instead of fiveMinutesLater
     const futureTime =
-      fiveMinutesLater.getHours().toString().padStart(2, "0") +
+      twentyMinutesLater.getHours().toString().padStart(2, "0") +
       ":" +
-      fiveMinutesLater.getMinutes().toString().padStart(2, "0") +
+      twentyMinutesLater.getMinutes().toString().padStart(2, "0") +
       ":" +
-      fiveMinutesLater.getSeconds().toString().padStart(2, "0");
+      twentyMinutesLater.getSeconds().toString().padStart(2, "0");
 
     const currentDate = now.toISOString().split("T")[0];
 
     console.log(`📅 Current date: ${currentDate}`);
     console.log(`⏰ Current time: ${currentTime}`);
-    console.log(`⏰ Future time (5 min later): ${futureTime}`);
+    // 🔥 CHANGED: Updated log message
+    console.log(`⏰ Future time (20 min later): ${futureTime}`);
 
-    // Find classes starting in next 5 minutes
+    // 🔥 CHANGED: Updated comment
+    // Find classes starting in next 20 minutes
     const [classes] = await db.execute(
       `
       SELECT 
@@ -53,7 +59,9 @@ async function checkUpcomingClasses() {
       [currentDate, currentTime, futureTime],
     );
 
-    console.log(`📚 Found ${classes.length} classes starting soon`);
+    console.log(
+      `📚 Found ${classes.length} classes starting in the next 20 minutes`,
+    );
 
     if (classes.length > 0) {
       console.log(
@@ -61,7 +69,7 @@ async function checkUpcomingClasses() {
         classes.map((c) => ({
           id: c.id,
           time: c.class_time,
-          title: "Check courses table",
+          course_id: c.course_id,
         })),
       );
     }
@@ -118,9 +126,10 @@ async function sendClassReminders(classItem) {
       `👥 Found ${subscribers.length} subscribers for ${course.title}`,
     );
 
+    // 🔥 ONLY CHANGE: "5 minutes" → "20 minutes"
     const notificationPayload = {
       title: "📚 Class Reminder",
-      body: `${course.title} starts in 5 minutes at ${classItem.location}`,
+      body: `${course.title} starts in 20 minutes at ${classItem.location}`,
       icon: "/icon.png",
       data: {
         classId: classItem.id,

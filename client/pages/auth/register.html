@@ -5,7 +5,16 @@
 
     <input id="firstName" type="text" placeholder="First Name" />
     <input id="lastName" type="text" placeholder="Last Name" />
-    <input id="email" type="email" placeholder="Email" />
+
+    <!-- 🔥 NEW: Added pattern attribute for email -->
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+      title="Please enter a valid email (e.g., [email protected])"
+    />
+
     <input id="password" type="password" placeholder="Password" />
 
     <select id="department">

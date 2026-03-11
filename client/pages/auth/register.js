@@ -15,6 +15,12 @@ export async function renderRegister() {
   document.getElementById("goLogin").addEventListener("click", renderLogin);
 }
 
+// 🔥 NEW: Email validation function
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
 async function register() {
   const formData = {
     firstName: document.getElementById("firstName").value.trim(),
@@ -26,12 +32,21 @@ async function register() {
     year: document.getElementById("year").value,
   };
 
-  // Frontend validation (UX purpose only)
+  // Frontend validation
   for (let key in formData) {
     if (!formData[key]) {
       notifications.warning("All fields are required", "Missing Information");
       return;
     }
+  }
+
+  // 🔥 NEW: Validate email format
+  if (!isValidEmail(formData.email)) {
+    notifications.error(
+      "Please enter a valid email address (e.g., [email protected])",
+      "Invalid Email",
+    );
+    return;
   }
 
   try {
@@ -52,7 +67,7 @@ async function register() {
 
     // Small delay before redirect so user sees success message
     setTimeout(() => {
-      renderLogin(); // ✅ Correct flow
+      renderLogin();
     }, 1500);
   } catch (error) {
     console.error("Register error:", error);

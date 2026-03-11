@@ -1,5 +1,26 @@
 import { loadCSS } from "../../../utils/loadCSS.js";
 
+// 🔥 NEW: Helper function for Microsoft Office Viewer
+function getFileViewUrl(filePath, fileName) {
+  const extension = fileName.split(".").pop().toLowerCase();
+  const baseUrl = "http://localhost:3000";
+  const fullPath = filePath.replace(/\\\\/g, "/");
+
+  // PDF files - open directly in browser
+  if (extension === "pdf") {
+    return `${baseUrl}/${fullPath}`;
+  }
+
+  // Office files - use Microsoft Online Viewer
+  if (["ppt", "pptx", "doc", "docx", "xls", "xlsx"].includes(extension)) {
+    const fileUrl = encodeURIComponent(`${baseUrl}/${fullPath}`);
+    return `https://view.officeapps.live.com/op/view.aspx?src=${fileUrl}`;
+  }
+
+  // All other files - just open normally
+  return `${baseUrl}/${fullPath}`;
+}
+
 export async function renderStudentCourses() {
   const token = localStorage.getItem("token");
   const content = document.getElementById("studentContent");
@@ -91,23 +112,20 @@ async function viewCourse(courseId) {
           materials.length === 0
             ? "<p>No materials available.</p>"
             : materials
-
                 .map(
                   (m) => `
     <div class="material-card">
       <h3>${m.title}</h3>
-
+      <p><small>${m.file_name}</small></p>
       <div class="material-buttons">
         <a 
-          href="http://localhost:3000/${m.file_path.replace(/\\\\/g, "/")}" 
+          href="${getFileViewUrl(m.file_path, m.file_name)}" 
           target="_blank"
           class="open-btn"
         >
           👁 Open
         </a>
-
         <a 
-
           href="http://localhost:3000/${m.file_path.replace(/\\\\/g, "/")}" 
           download
           class="download-btn"
@@ -119,9 +137,10 @@ async function viewCourse(courseId) {
   `,
                 )
                 .join("")
-        };
-    </div>
+        }
+      </div>
     `;
+
     document
       .getElementById("backToCourses")
       .addEventListener("click", renderStudentCourses);
