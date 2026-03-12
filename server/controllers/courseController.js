@@ -23,7 +23,7 @@ exports.createCourse = async (req, res) => {
     // 2️⃣ Admin validation (STRICT)
     if (user.role === "admin") {
       // Check if admin's department and section are defined
-      if (!user.department || !user.section || !year) {
+      if (!user.department || !user.section || !user.year) {
         return res.status(403).json({
           message: "Access denied: Admin department, section  and year not set",
         });
