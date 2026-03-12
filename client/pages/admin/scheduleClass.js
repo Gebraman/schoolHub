@@ -1,6 +1,11 @@
 import { loadCSS } from "../../utils/loadCSS.js";
 import notifications from "../../utils/notifications.js";
+import CONFIG from "../../config.js"; // Add this line
 
+/**
+ * Renders the schedule class page for admin
+ * Loads CSS, fetches HTML, and sets up form
+ */
 export async function renderScheduleClass() {
   const adminContent = document.getElementById("adminContent");
 
@@ -38,11 +43,15 @@ export async function renderScheduleClass() {
   }, 100);
 }
 
+/**
+ * Loads courses for the dropdown menu
+ */
 async function loadCourses() {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:3000/api/courses", {
+    // Fetch courses from backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/courses`, {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -65,6 +74,10 @@ async function loadCourses() {
   }
 }
 
+/**
+ * Handles class scheduling form submission
+ * Validates input and sends data to backend API
+ */
 async function scheduleClass() {
   const courseId = document.getElementById("scheduleCourse").value;
   const date = document.getElementById("classDate").value;
@@ -91,7 +104,8 @@ async function scheduleClass() {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/api/schedule", {
+    // Send schedule data to backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/schedule`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +135,7 @@ async function scheduleClass() {
       5000,
     );
 
-    // Clear form
+    // Clear form fields
     document.getElementById("scheduleCourse").value = "";
     document.getElementById("classDate").value = "";
     document.getElementById("classTime").value = "";

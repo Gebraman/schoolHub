@@ -1,5 +1,10 @@
 import { loadCSS } from "../../../utils/loadCSS.js";
+import CONFIG from "../../../config.js";
 
+/**
+ * Renders the student assignments page
+ * Fetches and displays all assignments for the student
+ */
 export async function renderStudentAssignments() {
   const token = localStorage.getItem("token");
   const content = document.getElementById("studentContent");
@@ -13,7 +18,8 @@ export async function renderStudentAssignments() {
     const rest = await fetch("./pages/student/assignments/assignment.html");
     content.innerHTML = await rest.text();
 
-    const res = await fetch("http://localhost:3000/api/student/assignments", {
+    // Fetch assignments from backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/student/assignments`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -29,6 +35,7 @@ export async function renderStudentAssignments() {
       return;
     }
 
+    // Render each assignment with file links
     container.innerHTML = assignments
       .map((a) => {
         const deadlineDate = new Date(a.deadline);
@@ -45,14 +52,14 @@ export async function renderStudentAssignments() {
 
             <div class="assignment-buttons">
               <a 
-                href="http://localhost:3000/${a.file_path.replace(/\\\\/g, "/")}" 
+                href="${CONFIG.API_URL}/${a.file_path.replace(/\\\\/g, "/")}" 
                 target="_blank"
                 class="open-btn">
                 👁 Open
               </a>
 
               <a 
-                href="http://localhost:3000/${a.file_path.replace(/\\\\/g, "/")}" 
+                href="${CONFIG.API_URL}/${a.file_path.replace(/\\\\/g, "/")}" 
                 download
                 class="download-btn">
                 📥 Download
@@ -63,7 +70,7 @@ export async function renderStudentAssignments() {
       })
       .join("");
   } catch (error) {
-    console.error(error);
+    console.error("Student assignments error:", error);
     content.innerHTML = `
       <div class="student-assignments">
         <h2>Error loading assignments</h2>

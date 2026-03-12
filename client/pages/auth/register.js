@@ -1,7 +1,12 @@
 import { loadCSS } from "../../utils/loadCSS.js";
 import { renderLogin } from "./login.js";
 import notifications from "../../utils/notifications.js";
+import CONFIG from "../../config.js";
 
+/**
+ * Renders the registration page
+ * Loads CSS, fetches HTML, and attaches event listeners
+ */
 export async function renderRegister() {
   const app = document.getElementById("app");
 
@@ -15,12 +20,20 @@ export async function renderRegister() {
   document.getElementById("goLogin").addEventListener("click", renderLogin);
 }
 
-// 🔥 NEW: Email validation function
+/**
+ * Validates email format using regex
+ * @param {string} email - Email to validate
+ * @returns {boolean} - True if email format is valid
+ */
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
+/**
+ * Handles user registration
+ * Validates input, sends data to server, and redirects on success
+ */
 async function register() {
   const formData = {
     firstName: document.getElementById("firstName").value.trim(),
@@ -32,7 +45,7 @@ async function register() {
     year: document.getElementById("year").value,
   };
 
-  // Frontend validation
+  // Check for empty fields
   for (let key in formData) {
     if (!formData[key]) {
       notifications.warning("All fields are required", "Missing Information");
@@ -40,7 +53,7 @@ async function register() {
     }
   }
 
-  // 🔥 NEW: Validate email format
+  // Validate email format
   if (!isValidEmail(formData.email)) {
     notifications.error(
       "Please enter a valid email address (e.g., [email protected])",
@@ -50,7 +63,8 @@ async function register() {
   }
 
   try {
-    const response = await fetch("http://localhost:3000/api/auth/register", {
+    // Send registration request to backend API
+    const response = await fetch(`${CONFIG.API_URL}/api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -65,7 +79,7 @@ async function register() {
 
     notifications.success("Registration successful! Please login.", "Welcome!");
 
-    // Small delay before redirect so user sees success message
+    // Brief delay to show success message before redirect
     setTimeout(() => {
       renderLogin();
     }, 1500);

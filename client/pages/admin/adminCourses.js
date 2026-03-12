@@ -1,6 +1,11 @@
 import { loadCSS } from "../../utils/loadCSS.js";
 import { renderAdminCourseDetails } from "./adminCourseDetails.js";
+import CONFIG from "../../config.js"; // Add this line
 
+/**
+ * Renders the admin courses page
+ * Loads CSS, fetches HTML, and loads course list
+ */
 export async function renderAdminCourses() {
   const content = document.getElementById("adminContent");
 
@@ -12,11 +17,15 @@ export async function renderAdminCourses() {
   loadAdminCourses();
 }
 
+/**
+ * Fetches and displays all courses for admin
+ */
 async function loadAdminCourses() {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:3000/api/courses", {
+    // Fetch courses from backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/courses`, {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -31,6 +40,7 @@ async function loadAdminCourses() {
       return;
     }
 
+    // Render course cards
     container.innerHTML = courses
       .map(
         (c) => `
@@ -43,6 +53,7 @@ async function loadAdminCourses() {
       )
       .join("");
 
+    // Attach view function to window for onclick handler
     window.viewCourse = function (courseId) {
       renderAdminCourseDetails(courseId);
     };

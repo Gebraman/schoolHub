@@ -5,7 +5,8 @@ import { renderLogin } from "./pages/auth/login.js";
 import { renderRegister } from "./pages/auth/register.js";
 import { renderAdminDashboard } from "./pages/admin/dashboard.js";
 import { renderStudentLayout } from "./pages/student/layout/studentLayout.js";
-import notifications from "./utils/notifications.js"; // Add this line
+import notifications from "./utils/notifications.js";
+import CONFIG from "./config.js"; // Add this line
 
 // Navbar routing
 document.getElementById("navHome").onclick = renderHome;
@@ -151,7 +152,8 @@ async function subscribeToPushNotifications() {
       ),
     });
 
-    const response = await fetch("http://localhost:3000/api/push/subscribe", {
+    // FIXED: Use CONFIG.API_URL instead of hardcoded localhost
+    const response = await fetch(`${CONFIG.API_URL}/api/push/subscribe`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

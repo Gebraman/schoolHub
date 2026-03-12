@@ -1,6 +1,11 @@
 import { loadCSS } from "../../utils/loadCSS.js";
 import notifications from "../../utils/notifications.js";
+import CONFIG from "../../config.js"; // Add this line
 
+/**
+ * Renders the upload assignment page for admin
+ * Loads CSS, fetches HTML, and sets up form
+ */
 export async function renderUploadAssignment() {
   const adminContent = document.getElementById("adminContent");
 
@@ -31,11 +36,15 @@ export async function renderUploadAssignment() {
   }, 100);
 }
 
+/**
+ * Loads courses for the dropdown menu
+ */
 async function loadCourses() {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:3000/api/courses", {
+    // Fetch courses from backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/courses`, {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -58,6 +67,10 @@ async function loadCourses() {
   }
 }
 
+/**
+ * Handles assignment upload form submission
+ * Validates input and sends data to backend API
+ */
 async function uploadAssignment() {
   const courseId = document.getElementById("assignmentCourse").value;
   const title = document.getElementById("assignmentTitle").value.trim();
@@ -81,7 +94,8 @@ async function uploadAssignment() {
   formData.append("file", file);
 
   try {
-    const res = await fetch("http://localhost:3000/api/assignments", {
+    // Send assignment data to backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/assignments`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
@@ -98,6 +112,7 @@ async function uploadAssignment() {
 
     notifications.success("Assignment uploaded successfully", "Success");
 
+    // Clear form fields
     document.getElementById("assignmentCourse").value = "";
     document.getElementById("assignmentTitle").value = "";
     document.getElementById("deadline").value = "";

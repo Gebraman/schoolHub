@@ -1,6 +1,11 @@
 import { loadCSS } from "../../utils/loadCSS.js";
 import notifications from "../../utils/notifications.js";
+import CONFIG from "../../config.js"; // Add this line
 
+/**
+ * Renders the upload material page for admin
+ * Loads CSS, fetches HTML, and sets up form
+ */
 export async function renderUploadMaterial() {
   const adminContent = document.getElementById("adminContent");
 
@@ -28,6 +33,10 @@ export async function renderUploadMaterial() {
   document.getElementById("uploadMaterialBtn").onclick = uploadMaterial;
 }
 
+/**
+ * Handles material upload form submission
+ * Validates input and sends data to backend API
+ */
 async function uploadMaterial() {
   const courseId = document.getElementById("materialCourse").value;
   const title = document.getElementById("materialTitle").value;
@@ -49,7 +58,8 @@ async function uploadMaterial() {
   formData.append("file", file);
 
   try {
-    const res = await fetch("http://localhost:3000/api/materials", {
+    // Send material data to backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/materials`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
@@ -66,21 +76,25 @@ async function uploadMaterial() {
 
     notifications.success("Material uploaded successfully", "Success");
 
-    // Clear form
+    // Clear form fields
     document.getElementById("materialCourse").value = "";
     document.getElementById("materialTitle").value = "";
     document.getElementById("materialFile").value = "";
   } catch (err) {
-    console.error(err);
+    console.error("Upload material error:", err);
     notifications.error("Server error. Please try again.", "Error");
   }
 }
 
+/**
+ * Loads courses for the dropdown menu
+ */
 async function loadCourses() {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:3000/api/courses", {
+    // Fetch courses from backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/courses`, {
       headers: {
         Authorization: "Bearer " + token,
       },

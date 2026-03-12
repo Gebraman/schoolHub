@@ -3,32 +3,41 @@ import { renderRegister } from "./register.js";
 import { renderAdminDashboard } from "../admin/dashboard.js";
 import { renderStudentLayout } from "../student/layout/studentLayout.js";
 import notifications from "../../utils/notifications.js";
+// Import API configuration for environment-specific URLs
+import CONFIG from "../../config.js";
 
+/**
+ * Renders the login page
+ * Loads CSS, fetches HTML, and attaches event listeners
+ */
 export async function renderLogin() {
   const app = document.getElementById("app");
 
-  // 1. Load CSS
+  // Load required stylesheets
   loadCSS("./pages/auth/login.css");
   await loadCSS("../../utils/notifications.css");
 
-  // 2. Load HTML
+  // Fetch and inject login form HTML
   const res = await fetch("./pages/auth/login.html");
   const html = await res.text();
-
-  // 3. Render
   app.innerHTML = html;
 
-  // 4. Attach logic
+  // Attach event handlers
   document.getElementById("loginBtn").onclick = login;
   document.getElementById("goRegister").onclick = renderRegister;
 }
 
+/**
+ * Handles user login
+ * Validates credentials and redirects based on user role
+ */
 async function login() {
   try {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const res = await fetch("http://localhost:3000/api/auth/login", {
+    // Send login request to backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -36,25 +45,26 @@ async function login() {
 
     const data = await res.json();
 
+    // Handle login failure
     if (!res.ok) {
       notifications.error(data.message || "Login failed", "Error");
       return;
     }
 
-    // Show success notification
+    // Notify user of successful login
     notifications.success(
       `Welcome back, ${data.user.firstName}!`,
       "Login Successful",
       2000,
     );
 
-    // ✅ MUST store BOTH token and user
+    // Store authentication data
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
 
-    // Small delay so user sees success message before redirect
+    // Brief delay to show success message before redirect
     setTimeout(() => {
-      // 🔀 Redirect based on role
+      // Redirect based on user role
       if (data.user.role === "admin") {
         renderAdminDashboard();
       } else if (data.user.role === "student") {
@@ -62,6 +72,7 @@ async function login() {
       }
     }, 1500);
   } catch (err) {
+    // Handle network or server errors
     console.error("Login error:", err);
     notifications.error("Server error. Please try again.", "Connection Error");
   }

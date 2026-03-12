@@ -1,9 +1,13 @@
 import { loadCSS } from "../../../utils/loadCSS.js";
+import CONFIG from "../../../config.js";
 
-// 🔥 NEW: Helper function for Microsoft Office Viewer
+/**
+ * Helper function for Microsoft Office Viewer
+ * Returns appropriate URL based on file type and environment
+ */
 function getFileViewUrl(filePath, fileName) {
   const extension = fileName.split(".").pop().toLowerCase();
-  const baseUrl = "http://localhost:3000";
+  const baseUrl = CONFIG.API_URL; // Use config instead of hardcoded localhost
   const fullPath = filePath.replace(/\\\\/g, "/");
 
   // PDF files - open directly in browser
@@ -21,6 +25,10 @@ function getFileViewUrl(filePath, fileName) {
   return `${baseUrl}/${fullPath}`;
 }
 
+/**
+ * Renders the student courses page
+ * Fetches and displays all courses for the student
+ */
 export async function renderStudentCourses() {
   const token = localStorage.getItem("token");
   const content = document.getElementById("studentContent");
@@ -30,7 +38,8 @@ export async function renderStudentCourses() {
   content.innerHTML = `<h2>Loading courses...</h2>`;
 
   try {
-    const response = await fetch("http://localhost:3000/api/student/courses", {
+    // Fetch courses from backend API
+    const response = await fetch(`${CONFIG.API_URL}/api/student/courses`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -48,6 +57,7 @@ export async function renderStudentCourses() {
       return;
     }
 
+    // Display courses grid
     content.innerHTML = `
       <div class="student-courses">
         <h2>My Courses</h2>
@@ -69,7 +79,7 @@ export async function renderStudentCourses() {
       </div>
     `;
 
-    // Add click listeners
+    // Add click listeners to view buttons
     document.querySelectorAll(".view-course-btn").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const courseId = e.target.dataset.id;
@@ -82,13 +92,18 @@ export async function renderStudentCourses() {
   }
 }
 
+/**
+ * Fetches and displays materials for a specific course
+ * @param {string} courseId - ID of the selected course
+ */
 async function viewCourse(courseId) {
   const token = localStorage.getItem("token");
   const content = document.getElementById("studentContent");
 
   try {
+    // Fetch materials for the selected course
     const response = await fetch(
-      `http://localhost:3000/api/student/materials/${courseId}`,
+      `${CONFIG.API_URL}/api/student/materials/${courseId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -102,6 +117,7 @@ async function viewCourse(courseId) {
 
     const materials = await response.json();
 
+    // Display materials with file viewer links
     content.innerHTML = `
       <div class="course-materials">
         <h2>Course Materials</h2>
@@ -126,7 +142,7 @@ async function viewCourse(courseId) {
           👁 Open
         </a>
         <a 
-          href="http://localhost:3000/${m.file_path.replace(/\\\\/g, "/")}" 
+          href="${CONFIG.API_URL}/${m.file_path.replace(/\\\\/g, "/")}" 
           download
           class="download-btn"
         >
@@ -141,6 +157,7 @@ async function viewCourse(courseId) {
       </div>
     `;
 
+    // Add back button listener
     document
       .getElementById("backToCourses")
       .addEventListener("click", renderStudentCourses);

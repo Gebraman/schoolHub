@@ -1,5 +1,10 @@
 import { loadCSS } from "../../../utils/loadCSS.js";
+import CONFIG from "../../../config.js";
 
+/**
+ * Renders the student schedule page
+ * Loads CSS, fetches HTML, and loads schedule data
+ */
 export async function renderStudentSchedule() {
   const content = document.getElementById("studentContent");
 
@@ -11,11 +16,16 @@ export async function renderStudentSchedule() {
   loadSchedules();
 }
 
+/**
+ * Fetches and displays the student's class schedule
+ * Retrieves schedule data from the backend API
+ */
 async function loadSchedules() {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:3000/api/schedule", {
+    // Fetch schedule data from backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/schedule`, {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -33,6 +43,7 @@ async function loadSchedules() {
       return;
     }
 
+    // Render each schedule item
     container.innerHTML = schedules
       .map((s) => {
         const formattedDate = new Date(s.class_date).toLocaleDateString();

@@ -1,11 +1,19 @@
 import { renderAdminCourses } from "./adminCourses.js";
 import { loadCSS } from "../../utils/loadCSS.js";
+import CONFIG from "../../config.js"; // Add this line
+
+/**
+ * Renders detailed view of a specific course for admin
+ * Displays course info, materials, and assignments
+ * @param {string} courseId - ID of the course to view
+ */
 export async function renderAdminCourseDetails(courseId) {
   const content = document.getElementById("adminContent");
   await loadCSS("./pages/admin/adminCourseDetails.css");
   const token = localStorage.getItem("token");
 
-  const res = await fetch(`http://localhost:3000/api/courses/${courseId}`, {
+  // Fetch course details from backend API
+  const res = await fetch(`${CONFIG.API_URL}/api/courses/${courseId}`, {
     headers: {
       Authorization: "Bearer " + token,
     },
@@ -39,10 +47,10 @@ export async function renderAdminCourseDetails(courseId) {
                 <div class="file-card">
                   <p>${m.title}</p>
                   <div class="file-actions">
-                    <a href="http://localhost:3000/${m.file_path}" target="_blank">
+                    <a href="${CONFIG.API_URL}/${m.file_path}" target="_blank">
                       <button class="action-btn">Open</button>
                     </a>
-                    <a href="http://localhost:3000/${m.file_path}" download>
+                    <a href="${CONFIG.API_URL}/${m.file_path}" download>
                       <button class="action-btn download">Download</button>
                     </a>
                   </div>
@@ -66,10 +74,10 @@ export async function renderAdminCourseDetails(courseId) {
                 <div class="file-card">
                   <p>${a.title}</p>
                   <div class="file-actions">
-                    <a href="http://localhost:3000/${a.file_path}" target="_blank">
+                    <a href="${CONFIG.API_URL}/${a.file_path}" target="_blank">
                       <button class="action-btn">Open</button>
                     </a>
-                    <a href="http://localhost:3000/${a.file_path}" download>
+                    <a href="${CONFIG.API_URL}/${a.file_path}" download>
                       <button class="action-btn download">Download</button>
                     </a>
                   </div>
@@ -85,7 +93,7 @@ export async function renderAdminCourseDetails(courseId) {
   </section>
 `;
 
-  // ✅ Attach event AFTER innerHTML
+  // Attach back button event
   document.getElementById("backToCourses").addEventListener("click", () => {
     renderAdminCourses();
   });

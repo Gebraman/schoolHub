@@ -1,6 +1,11 @@
 import { loadCSS } from "../../utils/loadCSS.js";
 import notifications from "../../utils/notifications.js";
+import CONFIG from "../../config.js"; // Add this line
 
+/**
+ * Renders the create course page for admin
+ * Loads CSS, fetches HTML, and sets up form submission
+ */
 export async function renderCreateCourse() {
   const adminContent = document.getElementById("adminContent");
 
@@ -22,6 +27,10 @@ export async function renderCreateCourse() {
   document.getElementById("createCourseBtn").onclick = createCourse;
 }
 
+/**
+ * Handles course creation form submission
+ * Validates input and sends data to backend API
+ */
 async function createCourse() {
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
@@ -40,7 +49,8 @@ async function createCourse() {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/api/courses", {
+    // Send course data to backend API
+    const res = await fetch(`${CONFIG.API_URL}/api/courses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,14 +74,14 @@ async function createCourse() {
 
     notifications.success("Course created successfully", "Success");
 
-    // Clear form
+    // Clear form fields
     document.getElementById("title").value = "";
     document.getElementById("description").value = "";
     document.getElementById("department").value = "";
     document.getElementById("section").value = "";
     document.getElementById("year").value = "";
   } catch (err) {
-    console.error(err);
+    console.error("Create course error:", err);
     notifications.error("Server error. Please try again.", "Error");
   }
 }
