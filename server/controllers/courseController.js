@@ -32,7 +32,7 @@ exports.createCourse = async (req, res) => {
       if (
         department !== user.department ||
         section !== user.section ||
-        year !== user.year
+        parseInt(year) !== parseInt(user.year) // ← THIS IS  debug after deployment
       ) {
         return res.status(403).json({
           message:
