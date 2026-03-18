@@ -119,17 +119,17 @@ async function viewCourse(courseId) {
 
     // Display materials with file viewer links
     content.innerHTML = `
-      <div class="course-materials">
-        <h2>Course Materials</h2>
+  <div class="course-materials">
+    <h2>Course Materials</h2>
 
-        <button id="backToCourses">⬅ Back</button>
+    <button id="backToCourses">⬅ Back</button>
 
-        ${
-          materials.length === 0
-            ? "<p>No materials available.</p>"
-            : materials
-                .map(
-                  (m) => `
+    ${
+      materials.length === 0
+        ? "<p>No materials available.</p>"
+        : materials
+            .map(
+              (m) => `
     <div class="material-card">
       <h3>${m.title}</h3>
       <p><small>${m.file_name}</small></p>
@@ -142,8 +142,8 @@ async function viewCourse(courseId) {
           👁 Open
         </a>
         <a 
-          href="${CONFIG.API_URL}/${m.file_path.replace(/\\\\/g, "/")}" 
-          download
+          href="${m.file_path.startsWith("http") ? m.file_path : CONFIG.API_URL + "/" + m.file_path.replace(/\\\\/g, "/")}" 
+          download="${m.file_name}"
           class="download-btn"
         >
           📥 Download
@@ -151,11 +151,11 @@ async function viewCourse(courseId) {
       </div>
     </div>
   `,
-                )
-                .join("")
-        }
-      </div>
-    `;
+            )
+            .join("")
+    }
+  </div>
+`;
 
     // Add back button listener
     document

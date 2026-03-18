@@ -52,15 +52,15 @@ export async function renderStudentAssignments() {
 
             <div class="assignment-buttons">
               <a 
-                href="${CONFIG.API_URL}/${a.file_path.replace(/\\\\/g, "/")}" 
+                href="${a.file_path.startsWith("http") ? a.file_path : CONFIG.API_URL + "/" + a.file_path.replace(/\\\\/g, "/")}" 
                 target="_blank"
                 class="open-btn">
                 👁 Open
               </a>
 
               <a 
-                href="${CONFIG.API_URL}/${a.file_path.replace(/\\\\/g, "/")}" 
-                download
+                href="${a.file_path.startsWith("http") ? a.file_path : CONFIG.API_URL + "/" + a.file_path.replace(/\\\\/g, "/")}" 
+                download="${a.file_name || "assignment"}"
                 class="download-btn">
                 📥 Download
               </a>
