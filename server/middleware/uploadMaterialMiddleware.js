@@ -1,31 +1,32 @@
 const multer = require("multer");
-const path = require("path");
+const { storage } = require("../config/cloudinary"); // Import Cloudinary storage
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/materials/");
-  },
-  filename: function (req, file, cb) {
-    const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueName + path.extname(file.originalname));
-  },
-});
-
+// File filter for allowed types (same as before)
 const fileFilter = (req, file, cb) => {
   const allowedTypes = [
     "application/pdf",
     "application/vnd.ms-powerpoint",
     "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "image/jpeg",
+    "image/png",
   ];
 
   if (allowedTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error("Only PDF and PPT files allowed"), false);
+    cb(new Error("Only PDF, PPT, DOC, and image files are allowed"), false);
   }
 };
 
-module.exports = multer({
-  storage,
-  fileFilter,
+// Create multer upload instance with Cloudinary storage
+const upload = multer({
+  storage: storage, // Using Cloudinary storage instead of diskStorage
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 50 * 1024 * 1024, // 50MB limit
+  },
 });
+
+module.exports = upload;

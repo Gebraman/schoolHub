@@ -36,6 +36,10 @@ export async function renderAdminCourseDetails(courseId) {
       <p><strong>Department:</strong> ${data.course.department}</p>
     </div>
 
+
+
+
+    
     <div class="content-section">
       <h3>Materials</h3>
       <div class="card-grid">
