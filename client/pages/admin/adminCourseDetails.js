@@ -1,6 +1,6 @@
 import { renderAdminCourses } from "./adminCourses.js";
 import { loadCSS } from "../../utils/loadCSS.js";
-import CONFIG from "../../config.js"; // Add this line
+import CONFIG from "../../config.js";
 
 /**
  * Renders detailed view of a specific course for admin
@@ -36,10 +36,6 @@ export async function renderAdminCourseDetails(courseId) {
       <p><strong>Department:</strong> ${data.course.department}</p>
     </div>
 
-
-
-
-    
     <div class="content-section">
       <h3>Materials</h3>
       <div class="card-grid">
@@ -51,10 +47,10 @@ export async function renderAdminCourseDetails(courseId) {
                 <div class="file-card">
                   <p>${m.title}</p>
                   <div class="file-actions">
-                    <a href="${CONFIG.API_URL}/${m.file_path}" target="_blank">
+                    <a href="${m.file_path.startsWith("http") ? m.file_path : CONFIG.API_URL + "/" + m.file_path}" target="_blank">
                       <button class="action-btn">Open</button>
                     </a>
-                    <a href="${CONFIG.API_URL}/${m.file_path}" download>
+                    <a href="${m.file_path.startsWith("http") ? m.file_path : CONFIG.API_URL + "/" + m.file_path}" download>
                       <button class="action-btn download">Download</button>
                     </a>
                   </div>
@@ -78,10 +74,10 @@ export async function renderAdminCourseDetails(courseId) {
                 <div class="file-card">
                   <p>${a.title}</p>
                   <div class="file-actions">
-                    <a href="${CONFIG.API_URL}/${a.file_path}" target="_blank">
+                    <a href="${a.file_path.startsWith("http") ? a.file_path : CONFIG.API_URL + "/" + a.file_path}" target="_blank">
                       <button class="action-btn">Open</button>
                     </a>
-                    <a href="${CONFIG.API_URL}/${a.file_path}" download>
+                    <a href="${a.file_path.startsWith("http") ? a.file_path : CONFIG.API_URL + "/" + a.file_path}" download>
                       <button class="action-btn download">Download</button>
                     </a>
                   </div>
